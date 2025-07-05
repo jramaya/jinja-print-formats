@@ -1,0 +1,74 @@
+/* Estilos básicos para simular una página y fuentes limpias */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    background-color: gray; /* Un gris claro para el fondo */
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column; /* Para apilar las páginas verticalmente */
+    align-items: center;    /* Para centrar las páginas horizontalmente */
+    padding: 2rem 0;
+    gap: 2rem;              /* Espacio entre páginas */
+}
+
+.page {
+    background-color: rgb(242, 242, 239);
+    width: 210mm; /* Ancho de una hoja A4 */
+    min-height: 297mm; /* Alto de una hoja A4 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 2.5cm;
+    box-sizing: border-box;
+}
+
+/* Estilos para impresión */
+@media print {
+    body {
+        background-color: white; /* Fondo blanco para no gastar tinta */
+    }
+
+    .page-container {
+        padding: 0;
+        gap: 0;
+    }
+
+    .page {
+        width: 100%; /* Ocupa todo el ancho de la página de impresión */
+        min-height: 0;
+        margin: 0;
+        padding: 0; /* El navegador/usuario controla los márgenes de impresión */
+        box-shadow: none; /* Sin sombra */
+        page-break-after: always; /* Salto de página después de cada div.page */
+    }
+
+    .page:last-child {
+        page-break-after: auto; /* Evita un salto de página extra al final */
+    }
+}
+
+/* Estilos para cuando se carga en un iframe */
+.print-format .page-container{
+    background-color: white;
+}
+
+.print-format.page-container {
+    padding: 0;
+    gap: 0;
+}
+
+.print-format .page {
+    width: 100%;
+    background-color: white;
+    min-height: 0;
+    margin: 0;
+    box-shadow: none;
+    page-break-after: always; /* Salto de página después de cada div.page */
+}
+.print-format .page:last-child {
+    page-break-after: auto; /* Evita un salto de página extra al final */
+}

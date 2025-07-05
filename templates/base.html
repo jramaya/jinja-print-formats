@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte</title>
+    <link rel="stylesheet" href="{{ url_for('serve_css') }}">
+</head>
+<body>
+    <div class="page-container">
+        {# Iteramos sobre cada página y la envolvemos en un div.page #}
+        {% for page_html in pages %}
+            <div class="page">
+                {{ page_html|safe }}
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
