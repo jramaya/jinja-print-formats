@@ -1,0 +1,5 @@
+.page {
+    font-family: 'Courier New', Courier, monospace;
+    /* En esta sección se pueden modificar margenes, podría funcionar seleccionando en n child del page container para setear margenes por cada página distinta. */
+    padding: 1cm;
+}

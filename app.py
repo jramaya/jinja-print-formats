@@ -29,6 +29,13 @@ def generate_report(report_name):
         with open(data_path, 'r', encoding='utf-8') as f:
             report_data = json.load(f)
 
+    # Load custom CSS if it exists and render it with report_data
+    custom_css_path = os.path.join(report_dir, 'style.css')
+    custom_css = None
+    if os.path.exists(custom_css_path):
+        with open(custom_css_path, 'r', encoding='utf-8') as f:
+            custom_css = render_template_string(f.read(), report_data=report_data)
+
     pages_content = []
     try:
         page_files = sorted([f for f in os.listdir(report_dir) if f.startswith('page') and f.endswith('.html')])
@@ -40,7 +47,7 @@ def generate_report(report_name):
     except FileNotFoundError:
         abort(404)
 
-    return render_template('base.html', pages=pages_content)
+    return render_template('base.html', pages=pages_content, custom_css=custom_css)
 
 @app.route('/css/style.css')
 def serve_css():

@@ -24,7 +24,8 @@ Este es un proyecto base para crear reportes de múltiples páginas listos para 
 │       └── Lorem-Ipsum-report/  # Carpeta para un reporte específico
 │           ├── data.json      # Datos en formato JSON para el reporte
 │           ├── page1.html     # Contenido de la primera página
-│           └── page2.html     # Contenido de la segunda página
+│           ├── page2.html     # Contenido de la segunda página
+│           └── style.css      # (Opcional) Estilos CSS específicos para este reporte
 └── README.md              # Este archivo
 ```
 
