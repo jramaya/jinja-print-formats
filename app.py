@@ -6,6 +6,21 @@ app = Flask(__name__)
 # Directorio base de las plantillas de reportes
 REPORTS_DIR = os.path.join('templates', 'reports')
 
+@app.route('/')
+def index():
+    """
+    Muestra una lista de todos los reportes disponibles.
+    """
+    try:
+        # Obtiene los nombres de las carpetas de los reportes
+        report_names = [name for name in os.listdir(REPORTS_DIR)
+                        if os.path.isdir(os.path.join(REPORTS_DIR, name))]
+    except FileNotFoundError:
+        # Si la carpeta de reportes no existe, muestra una lista vacía
+        report_names = []
+        
+    return render_template('index.html', reports=report_names)
+
 @app.route('/report/<report_name>')
 def generate_report(report_name):
     """
