@@ -1,62 +1,53 @@
 import os
-from flask import Flask, render_template, make_response
+import json
+from flask import Flask, render_template, render_template_string, abort, make_response
 
 app = Flask(__name__)
 
-# Directorio base de las plantillas de reportes
-REPORTS_DIR = os.path.join('templates', 'reports')
+REPORTS_PATH = os.path.join('templates', 'reports')
 
 @app.route('/')
 def index():
-    """
-    Muestra una lista de todos los reportes disponibles.
-    """
+    """Lists all available reports."""
     try:
-        # Obtiene los nombres de las carpetas de los reportes
-        report_names = [name for name in os.listdir(REPORTS_DIR)
-                        if os.path.isdir(os.path.join(REPORTS_DIR, name))]
+        reports = [d for d in os.listdir(REPORTS_PATH) if os.path.isdir(os.path.join(REPORTS_PATH, d))]
+        return render_template('index.html', reports=reports)
     except FileNotFoundError:
-        # Si la carpeta de reportes no existe, muestra una lista vacía
-        report_names = []
-        
-    return render_template('index.html', reports=report_names)
+        return "The 'templates/reports' directory was not found.", 404
 
 @app.route('/report/<report_name>')
 def generate_report(report_name):
-    """
-    Renderiza un reporte buscando todas las páginas de contenido
-    en la carpeta correspondiente.
-    """
-    report_folder = os.path.join(REPORTS_DIR, report_name)
-    
-    if not os.path.isdir(report_folder):
-        return "Reporte no encontrado", 404
+    """Generates a multi-page report with data from a JSON file."""
+    report_dir = os.path.join(REPORTS_PATH, report_name)
+    if not os.path.isdir(report_dir):
+        abort(404)
 
-    # Carga el contenido de cada página del reporte
+    # Load data from data.json if it exists
+    data_path = os.path.join(report_dir, 'data.json')
+    report_data = {}
+    if os.path.exists(data_path):
+        with open(data_path, 'r', encoding='utf-8') as f:
+            report_data = json.load(f)
+
     pages_content = []
-    page_files = sorted(os.listdir(report_folder)) # Ordena para asegurar page1, page2, etc.
-    
-    for page_file in page_files:
-        if page_file.endswith('.html'):
-            # La ruta para render_template debe ser relativa a la carpeta 'templates'
-            # y usar barras diagonales (/) para que Jinja la encuentre, sin importar el S.O.
-            template_path = f"reports/{report_name}/{page_file}"
-            # Renderizamos cada página por si tuviera lógica Jinja dentro
-            pages_content.append(render_template(template_path))
-            
+    try:
+        page_files = sorted([f for f in os.listdir(report_dir) if f.startswith('page') and f.endswith('.html')])
+        for page_file in page_files:
+            with open(os.path.join(report_dir, page_file), 'r', encoding='utf-8') as f:
+                # Pass report_data to be rendered in each page fragment
+                page_html = render_template_string(f.read(), report_data=report_data)
+                pages_content.append(page_html)
+    except FileNotFoundError:
+        abort(404)
+
     return render_template('base.html', pages=pages_content)
 
-@app.route('/static/css/style.css')
+@app.route('/css/style.css')
 def serve_css():
-    """
-    Sirve la hoja de estilos, renderizándola como una plantilla Jinja.
-    Esto te permite usar variables en tu CSS en el futuro.
-    """
-    css_template = render_template('css/style.css.j2')
-    response = make_response(css_template)
+    """Serves the CSS file."""
+    response = make_response(render_template('css/style.css.j2'))
     response.headers['Content-Type'] = 'text/css'
     return response
 
 if __name__ == '__main__':
-    # Para acceder desde la red local, usa host='0.0.0.0'
     app.run(debug=True, port=5001)
