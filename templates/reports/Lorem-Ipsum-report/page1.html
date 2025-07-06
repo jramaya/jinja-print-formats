@@ -1,9 +1,18 @@
-<h1>{{ report_data.report_title }}</h1>
-<p><strong>Autor:</strong> {{ report_data.author }} | <strong>Fecha:</strong> {{ report_data.publication_date }}</p>
+{% set data = report_data | default({}) %}
 
-<p>{{ report_data.introduction }}</p>
+<h1>{{ data.report_title | default('Título no disponible') }}</h1>
+<p>
+  <strong>Autor:</strong> {{ data.author | default('Desconocido') }} |
+  <strong>Fecha:</strong> {{ data.publication_date | default('Sin fecha') }}
+</p>
 
-{% for section in report_data.sections %}
-  <h3>{{ section.title }}</h3>
-  <p>{{ section.content }}</p>
-{% endfor %}
+<p>{{ data.introduction | default('Introducción no disponible.') }}</p>
+
+{% if data.sections %}
+  {% for section in data.sections %}
+    <h3>{{ section.title | default('Sin título') }}</h3>
+    <p>{{ section.content | default('Sin contenido') }}</p>
+  {% endfor %}
+{% else %}
+  <p>No hay secciones para mostrar.</p>
+{% endif %}

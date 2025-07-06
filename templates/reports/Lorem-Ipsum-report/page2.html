@@ -1,10 +1,16 @@
-<h2>{{ report_data.conclusion_title }}</h2>
+{% set data = report_data | default({}) %}
+
+<h2>{{ data.conclusion_title | default('Conclusión') }}</h2>
 <p>A continuación se presenta una lista de elementos importantes generados a partir de los datos:</p>
 <ul>
-  {% for item in report_data.conclusion_items %}
-    <li>{{ item }}</li>
+  {% if data.conclusion_items %}
+    {% for item in data.conclusion_items %}
+      <li>{{ item }}</li>
+    {% endfor %}
   {% else %}
     <li>No hay ítems para mostrar.</li>
-  {% endfor %}
+  {% endif %}
 </ul>
-<p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
+<p>
+  Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+</p>
