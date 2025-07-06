@@ -25,6 +25,11 @@
             padding-bottom: 0.5rem;
             margin-bottom: 1.5rem;
         }
+        .report-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
         ul {
             list-style-type: none;
             padding: 0;
@@ -38,12 +43,19 @@
         li:hover {
             background-color: #e9e9e9;
         }
-        a {
+        .report-item a:first-child {
             display: block;
             padding: 1rem;
             text-decoration: none;
             color: #007bff;
             font-size: 1.1rem;
+            flex-grow: 1;
+        }
+        .report-item a.raw-link {
+            padding: 1rem;
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-decoration: none;
         }
     </style>
 </head>
@@ -53,8 +65,10 @@
         {% if reports %}
             <ul>
                 {% for report in reports %}
-                    <li>
+                    <li class="report-item">
                         <a href="{{ url_for('generate_report', report_name=report) }}">{{ report }}</a>
+                        <a class="raw-link" href="{{ url_for('raw_report_html', report_name=report) }}">Ver HTML</a>
+                        <a class="raw-link" href="{{ url_for('raw_report_css', report_name=report) }}">Ver CSS</a>
                     </li>
                 {% endfor %}
             </ul>

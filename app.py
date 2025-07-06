@@ -5,6 +5,7 @@ from flask import Flask, render_template, render_template_string, abort, make_re
 app = Flask(__name__)
 
 REPORTS_PATH = os.path.join('templates', 'reports')
+TEMPLATES_PATH = 'templates'
 
 @app.route('/')
 def index():
@@ -48,6 +49,82 @@ def generate_report(report_name):
         abort(404)
 
     return render_template('base.html', pages=pages_content, custom_css=custom_css)
+
+@app.route('/report/<report_name>/raw_html')
+def raw_report_html(report_name):
+    """
+    Devuelve solo el HTML del reporte.
+    """
+    import re
+
+    report_dir = os.path.join(REPORTS_PATH, report_name)
+    if not os.path.isdir(report_dir):
+        abort(404)
+
+    # Lee los fragmentos de página (sin procesar)
+    page_files = sorted([f for f in os.listdir(report_dir) if f.startswith('page') and f.endswith('.html')])
+    pages_raw = []
+    for page_file in page_files:
+        with open(os.path.join(report_dir, page_file), 'r', encoding='utf-8') as f:
+            pages_raw.append(f.read())
+    pages_html = "\n".join(f'<div class="page">\n{page}\n</div>' for page in pages_raw)
+
+    # Lee el base.html como texto
+    base_path = os.path.join(TEMPLATES_PATH, 'base.html')
+    with open(base_path, 'r', encoding='utf-8') as f:
+        base_text = f.read()
+
+    # Elimina todos los tags de Jinja de la base
+    base_text = re.sub(r'{[{%].*?[%}]}', '', base_text, flags=re.DOTALL)
+
+    # Reemplaza el bloque de páginas por el HTML de las páginas
+    base_text = re.sub(
+        r'(<div class="page-container">)(.*?)(</div>)',
+        lambda m: f'{m.group(1)}\n{pages_html}\n{m.group(3)}',
+        base_text,
+        flags=re.DOTALL
+    )
+
+    markdown_content = f"""# Código HTML del Reporte: {report_name}
+
+## HTML
+```html
+{base_text.strip()}
+```
+"""
+    response = make_response(markdown_content.strip())
+    response.headers['Content-Type'] = 'text/markdown; charset=utf-8'
+    return response
+
+@app.route('/report/<report_name>/raw_css')
+def raw_report_css(report_name):
+    """
+    Devuelve solo el CSS combinado del reporte (global + custom).
+    """
+    report_dir = os.path.join(REPORTS_PATH, report_name)
+    if not os.path.isdir(report_dir):
+        abort(404)
+
+    css_global = render_template('css/style.css.j2')
+    custom_css_path = os.path.join(report_dir, 'style.css')
+    css_custom = ''
+    if os.path.exists(custom_css_path):
+        with open(custom_css_path, 'r', encoding='utf-8') as f:
+            css_custom = f.read()
+    css_full = css_global
+    if css_custom:
+        css_full += "\n\n" + css_custom
+
+    markdown_content = f"""# CSS del Reporte: {report_name}
+
+## CSS
+```css
+{css_full.strip()}
+```
+"""
+    response = make_response(markdown_content.strip())
+    response.headers['Content-Type'] = 'text/markdown; charset=utf-8'
+    return response
 
 @app.route('/css/style.css')
 def serve_css():
