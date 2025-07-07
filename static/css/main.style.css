@@ -33,6 +33,7 @@ body {
     }
 
     .page-container {
+        width: 100%; /* Ocupa todo el ancho de la página de impresión */
         padding: 0;
         gap: 0;
     }

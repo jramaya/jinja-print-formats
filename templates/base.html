@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reporte</title>
     {# Carga la hoja de estilos global #}
-    <link rel="stylesheet" href="{{ url_for('serve_css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.style.css') }}">
     {# Si existe un CSS personalizado para el reporte, lo inyecta aquí #}
     {% if custom_css %}
     <style>{{ custom_css|safe }}</style>

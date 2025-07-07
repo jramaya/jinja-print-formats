@@ -19,11 +19,12 @@ Este es un proyecto base para crear reportes de múltiples páginas listos para 
 ```
 .
 ├── app.py                 # Script de Python con Flask para servir la aplicación
+├── static/
+│   └── css/
+│       └── main.style.css # Hoja de estilos global (CSS puro, no plantilla Jinja)
 ├── templates/
 │   ├── base.html          # Plantilla HTML principal (esqueleto de la página)
 │   ├── index.html         # Página de inicio que lista todos los reportes
-│   ├── css/
-│   │   └── style.css.j2   # Hoja de estilos (como plantilla Jinja)
 │   └── reports/
 │       └── Lorem-Ipsum-report/  # Carpeta para un reporte específico
 │           ├── data.json      # Datos en formato JSON para el reporte
@@ -33,10 +34,10 @@ Este es un proyecto base para crear reportes de múltiples páginas listos para 
 └── README.md              # Este archivo
 ```
 
-- **`app.py`**: El corazón de la aplicación. Contiene las rutas para la página de inicio, la generación de reportes y el servicio del CSS y vistas raw.
-- **`templates/base.html`**: La plantilla maestra. Define la estructura HTML común (el `head`, el `body`, el `page-container`) para todos los reportes.
+- **`app.py`**: El corazón de la aplicación. Contiene las rutas para la página de inicio, la generación de reportes y las vistas raw.
+- **`static/css/main.style.css`**: La hoja de estilos global. Es un archivo CSS normal, no una plantilla Jinja.
+- **`templates/base.html`**: La plantilla maestra. Define la estructura HTML común (el `head`, el `body`, el `page-container`) para todos los reportes. Carga el CSS global desde `/static/css/main.style.css`.
 - **`templates/index.html`**: La página que se muestra en la raíz del sitio. Lista todos los directorios encontrados dentro de `templates/reports` y muestra enlaces para ver el HTML y CSS raw de cada reporte.
-- **`templates/css/style.css.j2`**: La hoja de estilos. Se sirve como una plantilla Jinja, lo que permite usar variables si fuera necesario.
 - **`templates/reports/[nombre-reporte]/data.json`**: (Opcional) Un archivo JSON que contiene los datos a inyectar en las plantillas del reporte. Estos datos están disponibles en tus plantillas `pageN.html` bajo la variable `report_data`.
 - **`templates/reports/`**: El directorio que contiene todos los reportes. Cada subdirectorio aquí es considerado un reporte individual.
 

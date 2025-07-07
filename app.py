@@ -105,7 +105,11 @@ def raw_report_css(report_name):
     if not os.path.isdir(report_dir):
         abort(404)
 
-    css_global = render_template('css/style.css.j2')
+    # Lee el CSS global como texto puro
+    css_global_path = os.path.join('static', 'css', 'main.style.css')
+    with open(css_global_path, 'r', encoding='utf-8') as f:
+        css_global = f.read()
+
     custom_css_path = os.path.join(report_dir, 'style.css')
     css_custom = ''
     if os.path.exists(custom_css_path):
