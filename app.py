@@ -135,7 +135,7 @@ def raw_report_html(report_name):
             raw_content = f.read()
             embedded_content = _embed_images_as_base64(raw_content)
             pages_raw.append(embedded_content)
-    pages_html = "\n".join(f'<div class="page">\n{page}\n</div>' for page in pages_raw)
+    pages_html = "\n".join(f'<div class="pagina">\n{page}\n</div>' for page in pages_raw)
 
     # Lee el base.html como texto
     base_path = os.path.join(TEMPLATES_PATH, 'base.html')
@@ -147,7 +147,7 @@ def raw_report_html(report_name):
 
     # Reemplaza el bloque de páginas por el HTML de las páginas
     base_text = re.sub(
-        r'(<div class="page-container">)(.*?)(</div>)',
+        r'(<div class="pagina-container">)(.*?)(</div>)',
         lambda m: f'{m.group(1)}\n{pages_html}\n{m.group(3)}',
         base_text,
         flags=re.DOTALL
@@ -231,13 +231,13 @@ def highlighted_report_html(report_name):
         with open(os.path.join(report_dir, pf), 'r', encoding='utf-8') as f:
             raw_content = f.read()
             pages_raw.append(_embed_images_as_base64(raw_content))
-    pages_html = "\n".join(f'<div class="page">\n{page}\n</div>' for page in pages_raw)
+    pages_html = "\n".join(f'<div class="pagina">\n{page}\n</div>' for page in pages_raw)
 
     with open(os.path.join(TEMPLATES_PATH, 'base.html'), 'r', encoding='utf-8') as f:
         base_text = f.read()
 
     base_text = re.sub(r'{[{%].*?[%}]}', '', base_text, flags=re.DOTALL)
-    base_text = re.sub(r'(<div class="page-container">)(.*?)(</div>)', lambda m: f'{m.group(1)}\n{pages_html}\n{m.group(3)}', base_text, flags=re.DOTALL)
+    base_text = re.sub(r'(<div class="pagina-container">)(.*?)(</div>)', lambda m: f'{m.group(1)}\n{pages_html}\n{m.group(3)}', base_text, flags=re.DOTALL)
 
     title = f"Código HTML: {report_name}"
     return _render_highlighted_view(title, base_text, 'html')

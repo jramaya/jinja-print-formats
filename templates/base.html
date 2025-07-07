@@ -13,9 +13,9 @@
     {% if reports and current_report %}
         {% include 'report_navbar.html' %}
     {% endif %}
-    <div class="page-container">
+    <div class="pagina-container">
         {% for page_html in pages %}
-            <div class="page">
+            <div class="pagina">
                 {{ page_html|safe }}
             </div>
         {% endfor %}
