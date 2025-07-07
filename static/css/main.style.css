@@ -1,6 +1,21 @@
 /* Estilos básicos para simular una página y fuentes limpias */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+/*
+  CSS Reset para el Contenido del Reporte
+  ---------------------------------------
+  Este bloque neutraliza los estilos de frameworks externos (como Bootstrap)
+  que podrían afectar el contenido del reporte DENTRO de cada `.page`.
+  Usa `:where()` para mantener la especificidad en CERO. Esto significa que
+  CUALQUIER regla en tu `style.css` personalizado (ej. `h1 { ... }`)
+  sobrescribirá este reseteo sin necesidad de `!important`.
+*/
+:where(.page *) {
+  all: unset;
+  display: revert; /* Restaura el 'display' por defecto del navegador (e.g., block para div, inline para span) */
+  box-sizing: border-box; /* Mantenemos un box-sizing consistente que es útil para el layout */
+}
+
 body {
     background-color: gray; /* Un gris claro para el fondo */
     font-family: 'Roboto', sans-serif;
@@ -72,4 +87,12 @@ body {
 }
 .print-format .page:last-child {
     page-break-after: auto; /* Evita un salto de página extra al final */
+}
+
+/* reset del print format */
+
+@media screen {
+	.print-format {
+        padding: 0 !important;
+    }
 }
