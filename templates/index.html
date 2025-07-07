@@ -67,8 +67,8 @@
                 {% for report in reports %}
                     <li class="report-item">
                         <a href="{{ url_for('generate_report', report_name=report) }}">{{ report }}</a>
-                        <a class="raw-link" href="{{ url_for('raw_report_html', report_name=report) }}">Ver HTML</a>
-                        <a class="raw-link" href="{{ url_for('raw_report_css', report_name=report) }}">Ver CSS</a>
+                        <a class="raw-link" href="{{ url_for('raw_report_html', report_name=report) }}" target="_blank">Ver HTML</a>
+                        <a class="raw-link" href="{{ url_for('raw_report_css', report_name=report) }}" target="_blank">Ver CSS</a>
                     </li>
                 {% endfor %}
             </ul>
