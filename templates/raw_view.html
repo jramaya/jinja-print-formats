@@ -13,20 +13,104 @@
             color: #212529;
         }
         .container {
-            max-width: 960px;
-            margin: 2rem auto;
-            padding: 1rem 2rem;
+            max-width: 1140px; /* Ancho máximo para el contenido, restaurando los márgenes */
+            margin: 2rem auto; /* Centrado y con margen superior/inferior */
+            padding: 2rem;     /* Espaciado interno uniforme */
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 15px rgba(0,0,0,0.07);
         }
         /* Estilos de Pygments para el resaltado de sintaxis */
         {{ pygments_css | safe }}
+        
+        /* --- Estilos para la Navbar, inspirados en report_navbar.html --- */
+        .view-navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+            padding: 0.5em 1em;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            font-size: 0.95rem;
+            gap: 1em;
+        }
+        .view-navbar .nav-left,
+        .view-navbar .nav-right {
+            flex: 0 0 auto;
+        }
+        .view-navbar .nav-center {
+            flex: 1 1 auto;
+            text-align: center;
+            color: #333;
+            font-weight: bold;
+            font-size: 1.05em;
+        }
+        .view-navbar button {
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            padding: 0.25em 0.8em;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            min-height: 28px;
+        }
+        .view-navbar button:hover {
+            background: #0056b3;
+        }
+        .view-navbar button.copied {
+            background-color: #28a745; /* Verde para indicar éxito */
+        }
+        .view-navbar button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+            opacity: 0.65;
+        }
     </style>
 </head>
 <body>
+    <nav class="view-navbar">
+        <div class="nav-left">
+            <button onclick="history.back()" disabled>← Volver</button>
+        </div>
+        <div class="nav-center">
+            <span>{{ title }}</span>
+        </div>
+        <div class="nav-right">
+            <button id="copy-code-btn">Copiar Código</button>
+        </div>
+    </nav>
+
     <div class="container">
         {{ content | safe }}
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const copyButton = document.getElementById('copy-code-btn');
+        const codeBlock = document.querySelector('.container pre');
+
+        if (copyButton && codeBlock) {
+            copyButton.addEventListener('click', function() {
+                navigator.clipboard.writeText(codeBlock.innerText).then(function() {
+                    // Feedback visual para el usuario
+                    copyButton.textContent = '¡Copiado!';
+                    copyButton.classList.add('copied');
+                    setTimeout(function() {
+                        copyButton.textContent = 'Copiar Código';
+                        copyButton.classList.remove('copied');
+                    }, 2000);
+                }).catch(function(err) {
+                    console.error('Error al copiar el código: ', err);
+                    copyButton.textContent = 'Error';
+                });
+            });
+        }
+    });
+    </script>
 </body>
 </html>
