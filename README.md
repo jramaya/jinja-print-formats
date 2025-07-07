@@ -8,10 +8,7 @@ Este es un proyecto base para crear reportes de múltiples páginas listos para 
 - **Generación Dinámica**: El servidor Flask detecta automáticamente nuevas carpetas de reportes y las muestra en la página de inicio.
 - **CSS para Impresión**: Incluye estilos `@media print` para asegurar que los reportes se vean bien al imprimirlos.
 - **Datos Dinámicos por Reporte**: Carga datos desde un archivo `data.json` específico para cada reporte, permitiendo que el contenido sea totalmente dinámico.
-- **Vista de Código Fuente**: Proporciona vistas "raw" en formato Markdown del código de cada reporte:
-  - **Ver HTML**: Muestra el HTML final del reporte, con la estructura base ya resuelta (sin tags Jinja en la base), pero los fragmentos de página insertados tal cual, con sus tags Jinja para `report_data` intactos.
-  - **Ver CSS**: Muestra el CSS combinado (global + custom del reporte).
-  Ambos accesibles desde la página de inicio.
+- **Vistas de Código Fuente**: Proporciona vistas del código HTML y CSS de cada reporte, tanto en formato de texto plano (`raw`) como con resaltado de sintaxis para una mejor legibilidad.
 - **Fácil de Extender**: Añadir un nuevo reporte es tan simple como crear una nueva carpeta y sus archivos HTML de contenido.
 
 ## Estructura del Proyecto
@@ -69,9 +66,9 @@ Ambas vistas se muestran en formato Markdown para facilitar la copia y revisión
     # En macOS/Linux
     source venv/bin/activate
     ```
-4.  Instala las dependencias necesarias (solo Flask en este caso):
+4.  Instala las dependencias del proyecto:
     ```bash
-    pip install Flask
+    pip install -r requirements.txt
     ```
 
 ### Ejecución
