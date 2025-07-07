@@ -2,4 +2,6 @@
     font-family: 'Courier New', Courier, monospace;
     /* En esta sección se pueden modificar margenes, podría funcionar seleccionando en n child del page container para setear margenes por cada página distinta. */
     padding: 1cm;
+    width: 215.9mm; /* US Letter width */
+    min-height: 279.4mm; /* US Letter height */
 }
