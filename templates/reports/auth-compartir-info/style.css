@@ -1,4 +1,4 @@
-.page {
+.pagina{
   font-family: Arial, Helvetica, sans-serif;
   font-size: 10pt;
   background-color: white;
@@ -38,7 +38,7 @@ ol {
 li {
   margin-bottom: 0.5em;
 }
-.checkbox {
+.aut-checkbox {
   display: inline-block;
   width: 14px;
   height: 14px;
@@ -47,7 +47,7 @@ li {
   margin-right: 0.25em;
   margin-left: -0.25em;
 }
-.line {
+.aut-linea {
   display: inline-block;
   border-bottom: 1px solid #000;
   vertical-align: bottom;
@@ -64,7 +64,7 @@ li {
   display: inline-grid;
   text-align: center;
 }
-.input-group .line {
+.input-group .aut-linea {
   display: block;
   margin-top: 1.9em;
 }
