@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Reportes</title>
-    <link rel="stylesheet" href="{{ url_for('serve_css') }}">
+    {# <link rel="stylesheet" href="{{ url_for('serve_css') }}"> #}
     <style>
         /* Estilos adicionales solo para esta página de índice */
         body {
@@ -29,12 +29,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0.5rem 1rem;
         }
         ul {
             list-style-type: none;
             padding: 0;
         }
         li {
+            padding: 0.5rem;
             background-color: #fafafa;
             margin-bottom: 0.5rem;
             border-radius: 4px;
@@ -43,19 +45,30 @@
         li:hover {
             background-color: #e9e9e9;
         }
-        .report-item a:first-child {
-            display: block;
-            padding: 1rem;
+        .report-title {
             text-decoration: none;
             color: #007bff;
             font-size: 1.1rem;
             flex-grow: 1;
         }
-        .report-item a.raw-link {
-            padding: 1rem;
+        .link-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 1rem;
+        }
+        .code-link {
             color: #6c757d;
             font-size: 0.9rem;
             text-decoration: none;
+            padding: 0.2rem 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            background-color: #fff;
+        }
+        .code-link:hover {
+            background-color: #f0f0f0;
+            border-color: #ccc;
         }
     </style>
 </head>
@@ -66,9 +79,15 @@
             <ul>
                 {% for report in reports %}
                     <li class="report-item">
-                        <a href="{{ url_for('generate_report', report_name=report) }}">{{ report }}</a>
-                        <a class="raw-link" href="{{ url_for('raw_report_html', report_name=report) }}">Ver HTML</a>
-                        <a class="raw-link" href="{{ url_for('raw_report_css', report_name=report) }}">Ver CSS</a>
+                        <a class="report-title" href="{{ url_for('generate_report', report_name=report) }}">{{ report }}</a>
+                        <div class="link-group">
+                            <a class="code-link" href="{{ url_for('highlighted_report_html', report_name=report) }}" target="_blank">Código HTML</a>
+                            <!-- <a class="code-link" href="{{ url_for('raw_report_html', report_name=report) }}" target="_blank">Raw</a> -->
+                        </div>
+                        <div class="link-group">
+                            <a class="code-link" href="{{ url_for('highlighted_report_css', report_name=report) }}" target="_blank">Código CSS</a>
+                            <!-- <a class="code-link" href="{{ url_for('raw_report_css', report_name=report) }}" target="_blank">Raw</a> -->
+                        </div>
                     </li>
                 {% endfor %}
             </ul>

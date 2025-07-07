@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reporte</title>
-    {# Carga la hoja de estilos global #}
-    <link rel="stylesheet" href="{{ url_for('serve_css') }}">
-    {# Si existe un CSS personalizado para el reporte, lo inyecta aquí #}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.style.css') }}">
     {% if custom_css %}
     <style>{{ custom_css|safe }}</style>
     {% endif %}
 </head>
 <body>
+    {% if reports and current_report %}
+        {% include 'report_navbar.html' %}
+    {% endif %}
     <div class="page-container">
-        {# Iteramos sobre cada página y la envolvemos en un div.page #}
         {% for page_html in pages %}
             <div class="page">
                 {{ page_html|safe }}
