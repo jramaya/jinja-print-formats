@@ -1,13 +1,17 @@
 import os
 import json
 import re
-from flask import Flask, render_template, render_template_string, abort, make_response
+from flask import Flask, render_template, render_template_string, abort, make_response, url_for
 
 # Nuevas importaciones para el resaltado de sintaxis
 import mistune
 from pygments import highlight
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter
+
+# Nuevas importaciones para incrustar imágenes
+import base64
+import mimetypes
 
 app = Flask(__name__)
 
@@ -26,6 +30,43 @@ class HighlightRenderer(mistune.HTMLRenderer):
 
 # Instancia el procesador de Markdown con nuestro renderizador personalizado.
 markdown_parser = mistune.create_markdown(renderer=HighlightRenderer())
+
+def _embed_images_as_base64(html_content):
+    """
+    Busca etiquetas de imagen con una estructura url_for específica y reemplaza el src
+    con un URI de datos base64 incrustado.
+    """
+    # Este regex encuentra el atributo src completo para su reemplazo.
+    # Captura el nombre de archivo de url_for('static', filename=...).
+    pattern = re.compile(r'(src\s*=\s*["\']{{\s*url_for\(\s*\'static\',\s*filename=[\'"](.+?)[\'"]\s*\)\s*}}["\'])')
+
+    def replacer(match):
+        full_src_attribute = match.group(1)
+        filename = match.group(2)
+        # Construye la ruta, asegurando que sea independiente del sistema operativo
+        image_path = os.path.join('static', *filename.split('/'))
+
+        # Si la imagen no existe, devuelve el atributo original para no romper la vista.
+        if not os.path.exists(image_path):
+            print(f"Advertencia: No se encontró la imagen en la ruta: {image_path}")
+            return full_src_attribute
+
+        try:
+            mime_type, _ = mimetypes.guess_type(image_path)
+            if mime_type is None:
+                mime_type = 'application/octet-stream'
+
+            with open(image_path, 'rb') as image_file:
+                encoded_string = base64.b64encode(image_file.read()).decode('utf-8')
+
+            # Devuelve el nuevo atributo src con el URI base64
+            return f'src="data:{mime_type};base64,{encoded_string}"'
+        except Exception as e:
+            # En caso de cualquier otro error, devuelve el original para no romper la vista
+            print(f"No se pudo incrustar la imagen {filename}: {e}")
+            return full_src_attribute
+
+    return pattern.sub(replacer, html_content)
 
 @app.route('/')
 def index():
@@ -91,7 +132,9 @@ def raw_report_html(report_name):
     pages_raw = []
     for page_file in page_files:
         with open(os.path.join(report_dir, page_file), 'r', encoding='utf-8') as f:
-            pages_raw.append(f.read())
+            raw_content = f.read()
+            embedded_content = _embed_images_as_base64(raw_content)
+            pages_raw.append(embedded_content)
     pages_html = "\n".join(f'<div class="page">\n{page}\n</div>' for page in pages_raw)
 
     # Lee el base.html como texto
@@ -183,7 +226,11 @@ def highlighted_report_html(report_name):
         abort(404)
 
     page_files = sorted([f for f in os.listdir(report_dir) if f.startswith('page') and f.endswith('.html')])
-    pages_raw = [open(os.path.join(report_dir, pf), 'r', encoding='utf-8').read() for pf in page_files]
+    pages_raw = []
+    for pf in page_files:
+        with open(os.path.join(report_dir, pf), 'r', encoding='utf-8') as f:
+            raw_content = f.read()
+            pages_raw.append(_embed_images_as_base64(raw_content))
     pages_html = "\n".join(f'<div class="page">\n{page}\n</div>' for page in pages_raw)
 
     with open(os.path.join(TEMPLATES_PATH, 'base.html'), 'r', encoding='utf-8') as f:
