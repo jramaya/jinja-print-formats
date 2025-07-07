@@ -48,7 +48,14 @@ def generate_report(report_name):
     except FileNotFoundError:
         abort(404)
 
-    return render_template('base.html', pages=pages_content, custom_css=custom_css)
+    reports = [d for d in os.listdir(REPORTS_PATH) if os.path.isdir(os.path.join(REPORTS_PATH, d))]
+    return render_template(
+        'base.html',
+        pages=pages_content,
+        custom_css=custom_css,
+        reports=reports,
+        current_report=report_name
+    )
 
 @app.route('/report/<report_name>/raw_html')
 def raw_report_html(report_name):
