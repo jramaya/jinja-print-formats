@@ -10,10 +10,10 @@
   CUALQUIER regla en tu `style.css` personalizado (ej. `h1 { ... }`)
   sobrescribirá este reseteo sin necesidad de `!important`.
 */
-:where(.pagina *) {
-  all: unset;
-  display: revert; /* Restaura el 'display' por defecto del navegador (e.g., block para div, inline para span) */
-  box-sizing: border-box; /* Mantenemos un box-sizing consistente que es útil para el layout */
+:where(.pagina-container *) {
+  all: revert;
+  /* display: revert; /* Restaura el 'display' por defecto del navegador (e.g., block para div, inline para span) */
+  /* box-sizing: border-box; /* Mantenemos un box-sizing consistente que es útil para el layout */
 }
 
 body {
