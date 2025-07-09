@@ -19,14 +19,6 @@
         }
 }
 
-p, ul {
-    margin-top: 0;
-}
-
-h1, h2 {
-    margin: 0;
-}
-
 .pagina-borde {
     border-color: gray;
     border-width: 0.2em;
@@ -57,6 +49,7 @@ h1, h2 {
     font-style: normal;
     font-weight: normal;
     font-size: 1em;
+    margin: 0;
 }
 
 .nombre-formulario {
@@ -81,6 +74,7 @@ h1, h2 {
     /* Coloca la viñeta dentro del elemento para que el texto se alinee en un solo bloque. */
     list-style-type: none; /* Ocultamos la viñeta original para usar una personalizada. */
     padding-left: 0; /* Eliminamos el padding por defecto para un control preciso. */
+    margin-bottom: 1em;
 }
 
 .itemlista {
