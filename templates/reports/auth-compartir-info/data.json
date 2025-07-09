@@ -1,0 +1,17 @@
+{
+  "lugar_fecha": {
+    "lugar": "San Salvador",
+    "dia": "23",
+    "mes": "Octubre",
+    "anio": "2024"
+  },
+  "solicitante": {
+    "nombre_completo": "Juan Alberto Pérez Gómez",
+    "domicilio": "San Salvador",
+    "calidad": "Deudor",
+    "dui": "01234567-8",
+    "nit": "1234-567890-123-4",
+    "telefono": "7788-9900",
+    "email": "juan.perez@email.com"
+  }
+}

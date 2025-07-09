@@ -46,6 +46,9 @@ li {
   vertical-align: middle;
   margin-right: 0.25em;
   margin-left: -0.25em;
+  text-align: center;
+  line-height: 14px;
+  font-weight: bold;
 }
 .aut-linea {
   display: inline-block;
@@ -53,6 +56,13 @@ li {
   vertical-align: bottom;
   margin: 0 0.2em;
   /* font-weight: 0.4cm;; */
+}
+.data-fill {
+  font-family: 'Courier New', Courier, monospace;
+  text-decoration: underline;
+  color: #444; /* Un gris oscuro, más claro que el negro puro */
+  padding: 0 0.2em; /* Espacio para que el texto no se pegue */
+  font-size: 10pt;
 }
 .signature-block {
   margin-top: 2em;

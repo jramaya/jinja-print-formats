@@ -1,9 +1,16 @@
+{% set lugar_fecha = report_data.lugar_fecha | default({}) %}
+{% set solicitante = report_data.solicitante | default({}) %}
+
 <div class="logosection">
     <img src="{{ url_for('static', filename='auth-compartir-info/logo.jpg') }}" style="width: 8em;" alt="Logo header">
 </div>
 <div class="header-date">
-    <p><span style="width: 19em" class="aut-linea"></span>, <span style="width: 4em" class="aut-linea"></span> de <span
-            style="width: 8em;" class="aut-linea"></span> de <span style="width: 6em" class="aut-linea"></span>.</p>
+    <p>
+        {% if lugar_fecha.lugar %}<span class="data-fill">{{ lugar_fecha.lugar }}</span>{% else %}<span style="width: 19em" class="aut-linea"></span>{% endif %},
+        {% if lugar_fecha.dia %}<span class="data-fill">{{ lugar_fecha.dia }}</span>{% else %}<span style="width: 4em" class="aut-linea"></span>{% endif %} de
+        {% if lugar_fecha.mes %}<span class="data-fill">{{ lugar_fecha.mes }}</span>{% else %}<span style="width: 8em;" class="aut-linea"></span>{% endif %} de
+        {% if lugar_fecha.anio %}<span class="data-fill">{{ lugar_fecha.anio }}</span>{% else %}<span style="width: 6em" class="aut-linea"></span>{% endif %}.
+    </p>
 </div>
 <div class="saludos">
     <p class="saludo">Señores</p>
@@ -13,9 +20,19 @@
 </div>
 <p>Estimados Señores.</p>
 
-<p>Yo, <span style="width: 14em" class="aut-linea"></span>, mayor de edad, del domicilio de <span style="width: 14em"
-        class="aut-linea"></span>, por este medio autorizo al Fondo Solidario para la Familia Microempresaria (FOSOFAMILIA)
-    a:</p>
+<p>
+    Yo,
+    {% if solicitante.nombre_completo %}
+        <span class="data-fill">{{ solicitante.nombre_completo }}</span>
+    {% else %}
+        <span style="width: 21em" class="aut-linea"></span>
+    {% endif %}, mayor de edad, del domicilio de
+    {% if solicitante.domicilio %}
+        <span class="data-fill">{{ solicitante.domicilio }}</span>
+    {% else %}
+        <span style="width: 14em" class="aut-linea"></span>
+    {% endif %}, por este medio autorizo al Fondo Solidario para la Familia Microempresaria (FOSOFAMILIA) a:
+</p>
 
 <ol>
     <li>Compartir información crediticia con la Superintendencia del Sistema Financiero y con la Agencia de Información
@@ -40,19 +57,33 @@
     SI
     <span class="aut-checkbox"></span>
     NO
-    <span class="aut-checkbox"></span>
+   <span class="aut-checkbox"></span>
     estoy de acuerdo con compartir dicha información.
 </p>
 
 <p>Lo anterior, en relación a las operaciones crediticias que tenga con el FOSOFAMILIA en calidad de <span
-        class="input-group"><span id="encalidad" style="width: 14em;" class="aut-linea"></span><em>(Codeudor o
-            Deudor)</em></span>.</p>
+        class="input-group">
+        {% if solicitante.calidad %}
+            <span class="data-fill">{{ solicitante.calidad }}</span>
+        {% else %}
+            <span id="encalidad" style="width: 14em;" class="aut-linea"></span>
+        {% endif %}
+        <em>(Codeudor o Deudor)</em>
+    </span>.</p>
 
 <div class="signature-block">
     <p style="padding-bottom: 3em;">Atentamente,</p>
     <p>F. <span style="width: 14em;" class="aut-linea"></span></p>
-    <p>DUI:</p>
-    <p>NIT: </p>
-    <p>Teléfono: </p>
-    <p>Correo electrónico: </p>
+    <p>DUI:
+        {% if solicitante.dui %}<span class="data-fill">{{ solicitante.dui }}</span>{% else %}<span style="width: 12em;" class="aut-linea"></span>{% endif %}
+    </p>
+    <p>NIT:
+        {% if solicitante.nit %}<span class="data-fill">{{ solicitante.nit }}</span>{% else %}<span style="width: 12em;" class="aut-linea"></span>{% endif %}
+    </p>
+    <p>Teléfono:
+        {% if solicitante.telefono %}<span class="data-fill">{{ solicitante.telefono }}</span>{% else %}<span style="width: 12em;" class="aut-linea"></span>{% endif %}
+    </p>
+    <p>Correo electrónico:
+        {% if solicitante.email %}<span class="data-fill">{{ solicitante.email }}</span>{% else %}<span style="width: 12em;" class="aut-linea"></span>{% endif %}
+    </p>
 </div>
