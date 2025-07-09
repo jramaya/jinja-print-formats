@@ -12,14 +12,19 @@
 
 @media print {
     .pagina {
-        font-size: 9pt;
+        font-size: 8pt !important;
         width: 8.5in;
         min-height: 11in;
         padding: 0.75cm;
         }
-    .seg-titulo-principal {
-        font-size: 9pt;
-        }
+}
+
+p, ul {
+    margin-top: 0;
+}
+
+h1, h2 {
+    margin: 0;
 }
 
 .pagina-borde {
@@ -39,10 +44,11 @@
     font-style: normal;
     font-weight: normal;
     text-align: center;
+    font-size: 1em;
 }
 
 .seg-titulo-principal {
-    font-size: 12.5pt;
+    font-size: 1.10em;
 }
 
 .seg-subtitulo {
@@ -50,6 +56,7 @@
     line-height: 1.147000;
     font-style: normal;
     font-weight: normal;
+    font-size: 1em;
 }
 
 .nombre-formulario {
@@ -68,6 +75,24 @@
     line-height: 1.159000;
     font-style: normal;
     font-weight: normal;
+}
+
+.lista {
+    /* Coloca la viñeta dentro del elemento para que el texto se alinee en un solo bloque. */
+    list-style-type: none; /* Ocultamos la viñeta original para usar una personalizada. */
+    padding-left: 0; /* Eliminamos el padding por defecto para un control preciso. */
+}
+
+.itemlista {
+    position: relative; /* Base para posicionar la viñeta de forma absoluta. */
+    padding-left: 4.5em;  /* Crea la sangría para el texto. Las líneas siguientes se alinearán aquí. */
+}
+
+.itemlista::before {
+    /* Usamos "•" para un punto redondo y añadimos margen para separarlo del texto. */
+    content: "•";
+    position: absolute; /* Saca la viñeta del flujo del texto. */
+    left: 2.5em;          /* La posiciona a la izquierda, creando la sangría "colgante". */
 }
 
 /* Fuentes */
