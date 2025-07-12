@@ -70,12 +70,14 @@
     line-height: 1.359000;
     font-style: normal;
     font-weight: normal;
+    margin: 0;
 }
 
 .lista {
     /* Coloca la viñeta dentro del elemento para que el texto se alinee en un solo bloque. */
     list-style-type: none; /* Ocultamos la viñeta original para usar una personalizada. */
     padding-left: 0; /* Eliminamos el padding por defecto para un control preciso. */
+    margin-top: 0;
 }
 
 .itemlista {
