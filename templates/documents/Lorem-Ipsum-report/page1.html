@@ -1,6 +1,6 @@
-{% set data = report_data | default({}) %}
+{% set data = document_data | default({}) %}
 
-<h1>{{ data.report_title | default('Título no disponible') }}</h1>
+<h1>{{ data.document_title | default('Título no disponible') }}</h1>
 <p>
   <strong>Autor:</strong> {{ data.author | default('Desconocido') }} |
   <strong>Fecha:</strong> {{ data.publication_date | default('Sin fecha') }}

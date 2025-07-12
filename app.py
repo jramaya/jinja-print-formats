@@ -15,7 +15,7 @@ import mimetypes
 
 app = Flask(__name__)
 
-REPORTS_PATH = os.path.join('templates', 'reports')
+REPORTS_PATH = os.path.join('templates', 'documents')
 TEMPLATES_PATH = 'templates'
 
 # --- MISTUNE & PYGMENTS SETUP ---
@@ -70,68 +70,68 @@ def _embed_images_as_base64(html_content):
 
 @app.route('/')
 def index():
-    """Lists all available reports."""
+    """Lists all available documents."""
     try:
-        reports = [d for d in os.listdir(REPORTS_PATH) if os.path.isdir(os.path.join(REPORTS_PATH, d))]
-        return render_template('index.html', reports=reports)
+        documents = [d for d in os.listdir(REPORTS_PATH) if os.path.isdir(os.path.join(REPORTS_PATH, d))]
+        return render_template('index.html', documents=documents)
     except FileNotFoundError:
-        return "The 'templates/reports' directory was not found.", 404
+        return "The 'templates/documents' directory was not found.", 404
 
-@app.route('/report/<report_name>')
-def generate_report(report_name):
-    """Generates a multi-page report with data from a JSON file."""
-    report_dir = os.path.join(REPORTS_PATH, report_name)
-    if not os.path.isdir(report_dir):
+@app.route('/document/<document_name>')
+def generate_document(document_name):
+    """Generates a multi-page document with data from a JSON file."""
+    document_dir = os.path.join(REPORTS_PATH, document_name)
+    if not os.path.isdir(document_dir):
         abort(404)
 
     # Load data from data.json if it exists
-    data_path = os.path.join(report_dir, 'data.json')
-    report_data = {}
+    data_path = os.path.join(document_dir, 'data.json')
+    document_data = {}
     if os.path.exists(data_path):
         with open(data_path, 'r', encoding='utf-8') as f:
-            report_data = json.load(f)
+            document_data = json.load(f)
 
-    # Load custom CSS if it exists and render it with report_data
-    custom_css_path = os.path.join(report_dir, 'style.css')
+    # Load custom CSS if it exists and render it with document_data
+    custom_css_path = os.path.join(document_dir, 'style.css')
     custom_css = None
     if os.path.exists(custom_css_path):
         with open(custom_css_path, 'r', encoding='utf-8') as f:
-            custom_css = render_template_string(f.read(), report_data=report_data)
+            custom_css = render_template_string(f.read(), document_data=document_data)
 
     pages_content = []
     try:
-        page_files = sorted([f for f in os.listdir(report_dir) if f.startswith('page') and f.endswith('.html')])
+        page_files = sorted([f for f in os.listdir(document_dir) if f.startswith('page') and f.endswith('.html')])
         for page_file in page_files:
-            with open(os.path.join(report_dir, page_file), 'r', encoding='utf-8') as f:
-                # Pass report_data to be rendered in each page fragment
-                page_html = render_template_string(f.read(), report_data=report_data)
+            with open(os.path.join(document_dir, page_file), 'r', encoding='utf-8') as f:
+                # Pass document_data to be rendered in each page fragment
+                page_html = render_template_string(f.read(), document_data=document_data)
                 pages_content.append(page_html)
     except FileNotFoundError:
         abort(404)
 
-    reports = [d for d in os.listdir(REPORTS_PATH) if os.path.isdir(os.path.join(REPORTS_PATH, d))]
+    documents = [d for d in os.listdir(REPORTS_PATH) if os.path.isdir(os.path.join(REPORTS_PATH, d))]
     return render_template(
         'base.html',
         pages=pages_content,
         custom_css=custom_css,
-        reports=reports,
-        current_report=report_name
+        documents=documents,
+        current_document=document_name
     )
 
-@app.route('/report/<report_name>/raw_html')
-def raw_report_html(report_name):
+@app.route('/document/<document_name>/raw_html')
+def raw_document_html(document_name):
     """
-    Devuelve solo el HTML del reporte.
+    Devuelve solo el HTML del documento.
     """
-    report_dir = os.path.join(REPORTS_PATH, report_name)
-    if not os.path.isdir(report_dir):
+    document_dir = os.path.join(REPORTS_PATH, document_name)
+    if not os.path.isdir(document_dir):
         abort(404)
 
     # Lee los fragmentos de página (sin procesar)
-    page_files = sorted([f for f in os.listdir(report_dir) if f.startswith('page') and f.endswith('.html')])
+    page_files = sorted([f for f in os.listdir(document_dir) if f.startswith('page') and f.endswith('.html')])
     pages_raw = []
     for page_file in page_files:
-        with open(os.path.join(report_dir, page_file), 'r', encoding='utf-8') as f:
+        with open(os.path.join(document_dir, page_file), 'r', encoding='utf-8') as f:
             raw_content = f.read()
             embedded_content = _embed_images_as_base64(raw_content)
             pages_raw.append(embedded_content)
@@ -153,7 +153,7 @@ def raw_report_html(report_name):
         flags=re.DOTALL
     )
 
-    markdown_content = f"""# Código HTML del Reporte: {report_name}
+    markdown_content = f"""# Código HTML del Documento: {document_name}
 
 ## HTML
 ```html
@@ -164,13 +164,13 @@ def raw_report_html(report_name):
     response.headers['Content-Type'] = 'text/markdown; charset=utf-8'
     return response
 
-@app.route('/report/<report_name>/raw_css')
-def raw_report_css(report_name):
+@app.route('/document/<document_name>/raw_css')
+def raw_document_css(document_name):
     """
-    Devuelve solo el CSS combinado del reporte (global + custom).
+    Devuelve solo el CSS combinado del documento (global + custom).
     """
-    report_dir = os.path.join(REPORTS_PATH, report_name)
-    if not os.path.isdir(report_dir):
+    document_dir = os.path.join(REPORTS_PATH, document_name)
+    if not os.path.isdir(document_dir):
         abort(404)
 
     # Lee el CSS global como texto puro
@@ -178,7 +178,7 @@ def raw_report_css(report_name):
     with open(css_global_path, 'r', encoding='utf-8') as f:
         css_global = f.read()
 
-    custom_css_path = os.path.join(report_dir, 'style.css')
+    custom_css_path = os.path.join(document_dir, 'style.css')
     css_custom = ''
     if os.path.exists(custom_css_path):
         with open(custom_css_path, 'r', encoding='utf-8') as f:
@@ -187,7 +187,7 @@ def raw_report_css(report_name):
     if css_custom:
         css_full += "\n\n" + css_custom
 
-    markdown_content = f"""# CSS del Reporte: {report_name}
+    markdown_content = f"""# CSS del Documento: {document_name}
 
 ## CSS
 ```css
@@ -216,19 +216,19 @@ def _render_highlighted_view(title, code, language):
     # Renderiza la plantilla de vista raw con el contenido y los estilos
     return render_template('raw_view.html', title=title, content=html_content, pygments_css=pygments_css)
 
-@app.route('/report/<report_name>/highlighted_html')
-def highlighted_report_html(report_name):
+@app.route('/document/<document_name>/highlighted_html')
+def highlighted_document_html(document_name):
     """
-    Devuelve una vista HTML con el código fuente del reporte resaltado.
+    Devuelve una vista HTML con el código fuente del documento resaltado.
     """
-    report_dir = os.path.join(REPORTS_PATH, report_name)
-    if not os.path.isdir(report_dir):
+    document_dir = os.path.join(REPORTS_PATH, document_name)
+    if not os.path.isdir(document_dir):
         abort(404)
 
-    page_files = sorted([f for f in os.listdir(report_dir) if f.startswith('page') and f.endswith('.html')])
+    page_files = sorted([f for f in os.listdir(document_dir) if f.startswith('page') and f.endswith('.html')])
     pages_raw = []
     for pf in page_files:
-        with open(os.path.join(report_dir, pf), 'r', encoding='utf-8') as f:
+        with open(os.path.join(document_dir, pf), 'r', encoding='utf-8') as f:
             raw_content = f.read()
             pages_raw.append(_embed_images_as_base64(raw_content))
     pages_html = "\n".join(f'<div class="pagina">\n{page}\n</div>' for page in pages_raw)
@@ -239,25 +239,25 @@ def highlighted_report_html(report_name):
     base_text = re.sub(r'{[{%].*?[%}]}', '', base_text, flags=re.DOTALL)
     base_text = re.sub(r'(<div class="pagina-container">)(.*?)(</div>)', lambda m: f'{m.group(1)}\n{pages_html}\n{m.group(3)}', base_text, flags=re.DOTALL)
 
-    title = f"Código HTML: {report_name}"
+    title = f"Código HTML: {document_name}"
     return _render_highlighted_view(title, base_text, 'html')
 
-@app.route('/report/<report_name>/highlighted_css')
-def highlighted_report_css(report_name):
+@app.route('/document/<document_name>/highlighted_css')
+def highlighted_document_css(document_name):
     """
-    Devuelve una vista HTML con el CSS combinado del reporte resaltado.
+    Devuelve una vista HTML con el CSS combinado del documento resaltado.
     """
-    report_dir = os.path.join(REPORTS_PATH, report_name)
-    if not os.path.isdir(report_dir):
+    document_dir = os.path.join(REPORTS_PATH, document_name)
+    if not os.path.isdir(document_dir):
         abort(404)
 
     with open(os.path.join('static', 'css', 'main.style.css'), 'r', encoding='utf-8') as f:
         css_global = f.read()
-    css_custom_path = os.path.join(report_dir, 'style.css')
+    css_custom_path = os.path.join(document_dir, 'style.css')
     css_custom = open(css_custom_path, 'r', encoding='utf-8').read() if os.path.exists(css_custom_path) else ''
     css_full = f"{css_global}\n\n{css_custom}" if css_custom else css_global
 
-    title = f"Código CSS: {report_name}"
+    title = f"Código CSS: {document_name}"
     return _render_highlighted_view(title, css_full, 'css')
 
 @app.route('/css/style.css')

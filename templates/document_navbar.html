@@ -1,4 +1,4 @@
-<nav class="report-navbar">
+<nav class="document-navbar">
     <div class="nav-left">
         <button onclick="window.location.href='{{ url_for('index') }}'">← Volver al índice</button>
     </div>
@@ -12,7 +12,7 @@
     </div>
 </nav>
 <style>
-.report-navbar {
+.document-navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -26,17 +26,17 @@
     gap: 0.5em;
     min-height: 36px;
 }
-.report-navbar .nav-left,
-.report-navbar .nav-right {
+.document-navbar .nav-left,
+.document-navbar .nav-right {
     flex: 0 0 auto;
 }
-.report-navbar .nav-center {
+.document-navbar .nav-center {
     flex: 1 1 auto;
     text-align: center;
     color: #444;
     font-size: 0.92em;
 }
-.report-navbar button {
+.document-navbar button {
     background: #007bff;
     color: #fff;
     border: none;
@@ -47,10 +47,10 @@
     transition: background 0.2s;
     min-height: 28px;
 }
-.report-navbar button:hover {
+.document-navbar button:hover {
     background: #0056b3;
 }
 @media print {
-    .report-navbar { display: none !important; }
+    .document-navbar { display: none !important; }
 }
 </style>
