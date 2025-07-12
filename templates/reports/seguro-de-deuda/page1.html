@@ -1,6 +1,247 @@
-<div class="pagina-borde">
+<div class="pagina-borde" style="position: relative">
+    <img  src="{{ url_for('static', filename='seguro-de-deuda/atlantida-logo.png') }}" style="position: absolute; top: 0; left: 0; width: 15em;" alt="Logo header">
     <p class="nombre-formulario texto-derecha">For05 - Informacion de Seguro de Deuda</p>
-    <h1 class="seg-titulo seg-titulo-principal">ATLÁNTIDA VIDA, S.A. SEGUROS DE PERSONAS</h1>
-    <h1 class="seg-titulo seg-titulo-principal">SOLICITUD DE INSCRIPCION PARA</h1>
-    <h1 class="seg-titulo seg-titulo-principal">SEGURO COLECTIVO DE DEUDA DECRECIENTE</h1>
+    <div style="padding-bottom: 2em; padding-top: 1em;">
+        <h1 class="seg-titulo seg-titulo-principal">ATLÁNTIDA VIDA, S.A. SEGUROS DE PERSONAS</h1>
+        <h1 class="seg-titulo seg-titulo-principal">SOLICITUD DE INSCRIPCION PARA</h1>
+        <h1 class="seg-titulo seg-titulo-principal" >SEGURO COLECTIVO DE DEUDA DECRECIENTE</h1>
+    </div>
+    <div class="texto-justificado texto">
+        <span>De acuerdo con las Condiciones de la Póliza No. CD-</span>
+        <span style="width: 13em" class="seguro-linea">&nbsp;</span>
+        <span> de Seguro COLECTIVO DE DEUDA</span>
+        <span>DECRECIENTE emitida a </span>
+        <span>nombre de </span>
+        <span style="width: 28em" class="seguro-linea">&nbsp;</span>
+        <span>, se solicita inscribir como asegurado a</span>
+        <span style="width: 100%" class="seguro-linea"> &nbsp;</span><br>
+    </div>
+    <div style="display: flex; justify-content: start;">
+        <div style="width: 14em;">
+            <p class="texto">Montos asegurados anteriores: </p>
+        </div>
+        <div><span style="width: 12em" class="seguro-linea">$ </span></div>
+    </div>
+    <div style="display: flex; justify-content: start;">
+        <div style="width: 14em;">
+            <p class="texto">Nuevo monto a asegurar: </p>
+        </div>
+        <div><span style="width: 12em" class="seguro-linea">$ </span></div>
+        <p class="texto" style="padding-left: 3em">Plazo<span style="width: 6em" class="seguro-linea">&nbsp;</span>años
+        </p>
+        <div style="padding-left: 3em;">
+            <p class="texto">Garantía:<span style="width: 10em" class="seguro-linea">&nbsp;</span></p>
+        </div>
+    </div>
+    <div style="display: flex; justify-content: start;">
+        <div style="width: 14em;">
+            <p class="texto">Monto total asegurado: </p>
+        </div>
+        <div><span style="width: 12em" class="seguro-linea">$ </span></div>
+    </div>
+    <div style="display: flex; justify-content: start; padding-top: 2em;">
+        <div style="width: 30em;"></div>
+        <div id="por-el-contratante"><span style="width: 22em; border-width: 0.14em;" class="seguro-linea">&nbsp;</span>
+            <p style="width: 20em; text-align: center;font-family: ff3;"><strong>Por el Contratante</strong></p>
+        </div>
+    </div>
+    <p class="texto">En relación con esta solicitud, manifiesto mi conformidad para ser inscrito como asegurado y para
+        ese fin proporciono los siguientes datos:</p>
+    <div class="texto" style="display: flex; align-items: baseline;">
+        <span>Nombre completo </span>
+        <span class="seguro-linea" style="flex-grow: 1;">&nbsp;</span>
+    </div>
+    <div class="texto">
+        Fecha de nacimiento <span class="seguro-linea" style="width: 3em;">&nbsp;</span>/<span class="seguro-linea"
+            style="width: 3em;">&nbsp;</span>/<span class="seguro-linea" style="width: 4.5em;">&nbsp;</span>
+        Edad:<span class="seguro-linea" style="width: 3em;">&nbsp;</span>años&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Estado Civil:<span class="seguro-linea" style="width: 12em;">&nbsp;</span>
+        Sexo:
+        <label for="sexo_m" style="padding-left: 1em;">M</label>
+        <input type="checkbox" id="sexo_m" name="sexo_m" class="seguro-checkbox" style="margin-left: 0.1em;" />
+        <label for="sexo_f" style="padding-left: 1.3em;">F</label>
+        <input type="checkbox" id="sexo_f" name="sexo_f" class="seguro-checkbox" style="margin-left: 0.1em;" />
+    </div>
+    <div class="texto">Estatura:<span class="seguro-linea" style="width: 3em;">&nbsp;</span>Mts.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Peso:<span class="seguro-linea" style="width: 4em;">&nbsp;</span>
+        libras&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ocupación actual<span class="seguro-linea" style="width: 18em;">&nbsp;</span>
+        No. DUI<span class="seguro-linea" style="width: 11em;">&nbsp;</span>
+    </div>
+    <div class="texto" style="display: flex; align-items: baseline;">
+        <span>NIT<span class="seguro-linea" style="width: 14em;">&nbsp;</span></span>
+        <span style="padding-left: 1em;">Dirección Residencia:</span>
+        <span class="seguro-linea" style="flex-grow: 1;">&nbsp;</span>
+    </div>
+    <div class="texto" style="display: flex; align-items: baseline;">
+        <span>Lugar de trabajo:</span><span class="seguro-linea" style="flex-grow: 1;">&nbsp;</span>
+    </div>
+    <div class="texto" style="display: flex; align-items: baseline;">
+        <span>Dirección del lugar de trabajo</span><span class="seguro-linea" style="flex-grow: 1;">&nbsp;</span>
+    </div>
+    <div class="texto" style="display: flex; align-items: baseline;">
+        <span>Designo como beneficiario irrevocable a</span>
+        <span class="seguro-linea" style="flex-grow: 1; max-width: 23em"><span style="margin-left: 1em;">FOSOFAMILIA</span></span>
+        <span>hasta por el importe de la deuda contraída con</span>
+    </div>
+    <div class="texto" style="display: flex; align-items: baseline;">
+        <span>dicha institución y el remanente si los hubiere, se pagará a estos beneficiarios: </span>
+    </div>
+    <table class="seguro-tabla">
+        <thead>
+            <tr>
+                <th style="width: auto;">NOMBRE COMPLETO</th>
+                <th style="width: 20%;">PARENTESCO</th>
+                <th style="width: 20%;">%</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2 class="seg-subtitulo" style="margin-top:2em">DECLARACION DE SALUD: Declaro que los datos proporcionados a continuación son verdaderos y completos</h2>
+    <div class="texto" style="display: flex; align-items: baseline;">
+        <span>PADECE O HA PADECIDO DE:</span>
+    </div>
+    <table class="seguro-tabla">
+        <thead>
+            <tr>
+                <th style="width: auto;"></th>
+                <th style="width: 4em;">SI</th>
+                <th style="width: 4em;">NO</th>
+                <th style="width: auto;"></th>
+                <th style="width: 4em;">SI</th>
+                <th style="width: 4em;">NO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Enfermedades del corazón o de la presión arterial</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>Enfermedades de la vejiga u órganos genitales </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Enfermedades del aparato respiratorio</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>Epilepsia</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Diabetes</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>Enfermedades del hígado</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>SIDA o infección VIH</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>Cáncer o tumores</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Enfermedades de los riñones</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>Otras Enfermedades</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="seg-subtitulo">Declaro que no padezco ni me ha sido diagnosticada ninguna enfermedad que he marcado como NO y acepto que, de padecer de alguna 
+de estas enfermedades previo a la fecha de esta declaración, no tendré derecho a ninguno de los beneficios o coberturas descritas en la 
+póliza de seguro, de la cual forma parte esta solicitud.  Si marqué SI en alguno de los padecimientos nombrados, a continuación, 
+proporciono los detalles (fecha, padecimiento, tratamiento recibido, situación actual): </p>
+<div class="texto" style="display: flex; align-items: baseline;">
+    <span style="width: 100%" class="seguro-linea"> &nbsp;</span><br>
+</div>
+<div class="texto" style="display: flex; align-items: baseline;">
+    <span style="width: 100%" class="seguro-linea"> &nbsp;</span><br>
+</div>
+<div class="texto-justificado texto">
+    <span>¿Ha estado en tratamiento con algún médico, hospital o clínica?</span>
+    <span style="width: 6em" class="seguro-linea">&nbsp;</span>
+    <span>(Caso afirmativo dar detalles):</span>
+    <span style="width: 100%" class="seguro-linea"> &nbsp;</span><br>
+</div>
+<div class="declaracion-tratamiento texto">
+    <span>¿Tiene alguna deformidad, amputación o defecto físico, defecto de la vista o del oído?</span>
+    <span style="width: 6em" class="seguro-linea">&nbsp;</span>
+    <span>(Caso afirmativo dar detalles)</span>
+    <span style="width: 100%" class="seguro-linea"> &nbsp;</span><br>
+</div>
+<div class="texto" style="display: flex; align-items: baseline;">
+    <span>¿Fuma cigarrillos o pipa?</span>
+    <span style="width: 6em" class="seguro-linea">&nbsp;</span>
+    <label for="si_fuma" style="padding-left: 0.5em;">SI</label>
+    <input type="checkbox" id="si_fuma" name="no_fuma" class="seguro-checkbox" style="margin-left: 0.1em;" />
+    <label for="no_fuma" style="padding-left: 0.5em;">NO</label>
+    <input type="checkbox" id="no_fuma" name="no_fuma" class="seguro-checkbox" style="margin-left: 0.1em;" />
+    <span>Cuántos al día?</span>
+    <span style="width: 3em" class="seguro-linea">&nbsp;</span>
+    <span>¿Ingiere bebidas alcohólicas? </span>
+    <label for="si_alcohol" style="padding-left: 0.5em;">SI</label>
+    <input type="checkbox" id="si_alcohol" name="si_alcohol" class="seguro-checkbox" style="margin-left: 0.1em;" />
+    <label for="no_alcohol" style="padding-left: 0.5em;">NO</label>
+    <input type="checkbox" id="no_fuma" name="no_alcohol" class="seguro-checkbox" style="margin-left: 0.1em;" />
+    <span>Cuántos al día?</span>
+    <span style="width: 3em" class="seguro-linea">&nbsp;</span>
+</div>
+<div class="texto" style="display: flex; align-items: baseline;">
+    <span>¿Viaja en aeronaves de uso privado?</span>
+    <label for="si_aeronaves_privadas" style="padding-left: 0.5em;">SI</label>
+    <input type="checkbox" id="si_aeronaves_privadas" name="si_aeronaves_privadas" class="seguro-checkbox" style="margin-left: 0.1em;" />
+    <label for="no_aeronaves_privadas" style="padding-left: 0.5em;">NO</label>
+    <input type="checkbox" id="no_aeronaves_privadas" name="no_aeronaves_privadas" class="seguro-checkbox" style="margin-left: 0.1em;" />
+    <span>Cuántas horas en el año:</span>
+    <span style="flex-grow: 1;width: auto;" class="seguro-linea">&nbsp;</span>
+</div>
+<div class="texto-justificado texto">
+    <span>¿Practica alguna actividad o deporte peligroso o extremo?</span>
+    <label for="si_actividad_extrema" style="padding-left: 0.5em;">SI</label>
+    <input type="checkbox" id="si_actividad_extrema" name="si_actividad_extrema" class="seguro-checkbox" style="margin-left: 0.1em;" />
+    <label for="no_actividad_extrema" style="padding-left: 0.5em;">NO</label>
+    <input type="checkbox" id="no_actividad_extrema" name="no_actividad_extrema" class="seguro-checkbox" style="margin-left: 0.1em;" />
+    <span>En caso afirmativo favor indicar qué clase y la frecuencia:</span>
+    <span style="width: 100%" class="seguro-linea"> &nbsp;</span><br>
+</div>
+<div class="texto">
+    <span>¿Es su ocupación piloto aviador?</span>
+    <label for="si_actividad_extrema" style="padding-left: 0.5em;">SI</label>
+    <input type="checkbox" id="si_actividad_extrema" name="si_actividad_extrema" class="seguro-checkbox" style="margin-left: 0.1em;" />
+    <label for="no_actividad_extrema" style="padding-left: 0.5em;">NO</label>
+    <input type="checkbox" id="no_actividad_extrema" name="no_actividad_extrema" class="seguro-checkbox" style="margin-left: 0.1em;" />
+    <span>En caso afirmativo favor completar cuestionario de aviación.</span>
+</div>
+<div class="texto" style="display: flex; align-items: baseline;">
+    <span style="width: 100%" class="seguro-linea-top"> &nbsp;</span><br>
+</div>
+<div class="texto" style="display: flex; justify-content: center; margin-top: 2em; align-items: baseline;">
+    <div style="text-align: center;">
+        <p>F.<span class="seguro-linea" style="width: 18em;">&nbsp;</span></p>
+        <span class="texto" style="margin-top: 0.5em;">(Firma del Solicitante)</span>
+    </div>
+</div>
 </div>
