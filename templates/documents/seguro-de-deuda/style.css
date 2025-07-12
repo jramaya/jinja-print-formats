@@ -28,6 +28,17 @@
     /* 'flex-grow: 1' hace que el borde se expanda para llenar el contenedor '.pagina'. */
     flex-grow: 1;
     padding: 0.25cm;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+#firmas {
+    margin-top: auto;
+}
+
+#firma-solicitante {
+    margin-top: auto;
 }
 
 .seg-titulo {
@@ -40,7 +51,8 @@
 }
 
 .seg-titulo-principal {
-    font-size: 1.10em;
+    font-size: 1.4em;
+    margin: 0;
 }
 
 .seg-subtitulo {
@@ -54,6 +66,7 @@
 
 .nombre-formulario {
     font-family: ff6;
+    font-size: 1.3em;
     line-height: 0.938477;
     font-style: normal;
     font-weight: normal;
