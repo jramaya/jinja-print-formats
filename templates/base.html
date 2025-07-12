@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reporte</title>
+    <title>Documento</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.style.css') }}">
     {% if custom_css %}
     <style>{{ custom_css|safe }}</style>
     {% endif %}
 </head>
 <body>
-    {% if reports and current_report %}
-        {% include 'report_navbar.html' %}
+    {% if documents and current_document %}
+        {% include 'document_navbar.html' %}
     {% endif %}
     <div class="pagina-container">
         {% for page_html in pages %}

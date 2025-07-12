@@ -2,10 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 /*
-  CSS Reset para el Contenido del Reporte
+  CSS Reset para el Contenido del Documento 
   ---------------------------------------
   Este bloque neutraliza los estilos de frameworks externos (como Bootstrap)
-  que podrían afectar el contenido del reporte DENTRO de cada `.pagina`.
+  que podrían afectar el contenido del documento DENTRO de cada `.pagina`.
   Usa `:where()` para mantener la especificidad en CERO. Esto significa que
   CUALQUIER regla en tu `style.css` personalizado (ej. `h1 { ... }`)
   sobrescribirá este reseteo sin necesidad de `!important`.
