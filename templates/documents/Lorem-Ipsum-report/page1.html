@@ -1,4 +1,4 @@
-{% set data = document_data | default({}) %}
+{% set data = doc | default({}) %}
 
 <h1>{{ data.document_title | default('Título no disponible') }}</h1>
 <p>

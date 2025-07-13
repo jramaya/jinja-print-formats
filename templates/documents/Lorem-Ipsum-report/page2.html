@@ -1,4 +1,4 @@
-{% set data = document_data | default({}) %}
+{% set data = doc | default({}) %}
 
 <h2>{{ data.conclusion_title | default('Conclusión') }}</h2>
 <p>A continuación se presenta una lista de elementos importantes generados a partir de los datos:</p>
