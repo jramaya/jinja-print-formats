@@ -86,25 +86,25 @@ def generate_document(document_name):
 
     # Load data from data.json if it exists
     data_path = os.path.join(document_dir, 'data.json')
-    document_data = {}
+    doc = {}
     if os.path.exists(data_path):
         with open(data_path, 'r', encoding='utf-8') as f:
-            document_data = json.load(f)
+            doc = json.load(f)
 
-    # Load custom CSS if it exists and render it with document_data
+    # Load custom CSS if it exists and render it with doc data 
     custom_css_path = os.path.join(document_dir, 'style.css')
     custom_css = None
     if os.path.exists(custom_css_path):
         with open(custom_css_path, 'r', encoding='utf-8') as f:
-            custom_css = render_template_string(f.read(), document_data=document_data)
+            custom_css = render_template_string(f.read(), doc=doc)
 
     pages_content = []
     try:
         page_files = sorted([f for f in os.listdir(document_dir) if f.startswith('page') and f.endswith('.html')])
         for page_file in page_files:
             with open(os.path.join(document_dir, page_file), 'r', encoding='utf-8') as f:
-                # Pass document_data to be rendered in each page fragment
-                page_html = render_template_string(f.read(), document_data=document_data)
+                # Pass doc data to be rendered in each page fragment
+                page_html = render_template_string(f.read(), doc=doc)
                 pages_content.append(page_html)
     except FileNotFoundError:
         abort(404)

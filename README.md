@@ -36,14 +36,14 @@ Este es un proyecto base para crear documentos de múltiples páginas listos par
 - **`static/css/main.style.css`**: La hoja de estilos global. Es un archivo CSS normal, no una plantilla Jinja.
 - **`templates/base.html`**: La plantilla maestra. Define la estructura HTML común (el `head`, el `body`, el `pagina-container`) para todos los documentos. Carga el CSS global desde `/static/css/main.style.css`.
 - **`templates/index.html`**: La página que se muestra en la raíz del sitio. Lista todos los directorios encontrados dentro de `templates/documents` y muestra enlaces para ver el HTML y CSS raw de cada documento.
-- **`templates/documents/[nombre-documento]/data.json`**: (Opcional) Un archivo JSON que contiene los datos a inyectar en las plantillas del documento. Estos datos están disponibles en tus plantillas `pageN.html` bajo la variable `document_data`.
+- **`templates/documents/[nombre-documento]/data.json`**: (Opcional) Un archivo JSON que contiene los datos a inyectar en las plantillas del documento. Estos datos están disponibles en tus plantillas `pageN.html` bajo la variable `doc`.
 - **`templates/documents/`**: El directorio que contiene todos los documentos. Cada subdirectorio aquí es considerado un documento individual.
 
 ## Vistas Raw
 
 En la página de inicio, cada documento tiene dos enlaces:
 - **Ver HTML**: `/document/<nombre_documento>/raw_html`  
-  Muestra el HTML del documento con la estructura base ya resuelta (sin tags Jinja en la base), pero los fragmentos de página insertados tal cual, con sus tags Jinja para `document_data` intactos (por ejemplo, verás `{% for section in document_data.sections %}` y `{{ section.title }}` en el HTML).
+  Muestra el HTML del documento con la estructura base ya resuelta (sin tags Jinja en la base), pero los fragmentos de página insertados tal cual, con sus tags Jinja para `doc` intactos (por ejemplo, verás `{% for section in doc.sections %}` y `{{ section.title }}` en el HTML).
 - **Ver CSS**: `/document/<nombre_documento>/raw_css`  
   Muestra el CSS combinado: primero el global y luego el custom del documento (si existe).
 
@@ -85,7 +85,7 @@ Ambas vistas se muestran en formato Markdown para facilitar la copia y revisión
 1.  Ve al directorio `templates/documents/`.
 2.  Crea una nueva carpeta con un nombre descriptivo para tu documento (por ejemplo, `Ventas-Anuales-2024`).
 3.  Dentro de esa nueva carpeta, crea los archivos de contenido para cada página. Nómbralos secuencialmente para que se ordenen correctamente: `page1.html`, `page2.html`, etc.
-4.  (Opcional) Crea un archivo `data.json` en la misma carpeta. Dentro de este archivo, define la estructura de datos que necesites. Estos datos estarán disponibles en tus plantillas `pageN.html` a través del objeto `document_data`. Por ejemplo: `{{ document_data.titulo }}`.
+4.  (Opcional) Crea un archivo `data.json` en la misma carpeta. Dentro de este archivo, define la estructura de datos que necesites. Estos datos estarán disponibles en tus plantillas `pageN.html` a través del objeto `doc`. Por ejemplo: `{{ doc.titulo }}`.
 5.  Cada uno de los archivos `pageN.html` solo debe contener el fragmento de HTML del contenido de esa página (títulos, párrafos, tablas, etc.), sin el `<html>` o `<body>`, y puede usar la sintaxis de Jinja2 para mostrar los datos del `data.json`.
 6.  (Opcional) Si necesitas estilos personalizados para el documento, agrega un archivo `style.css` en la carpeta del documento.
 7.  ¡Listo! Refresca la página de inicio en tu navegador y verás tu nuevo documento en la lista.
