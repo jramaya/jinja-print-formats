@@ -1,25 +1,31 @@
-.pagina {
+
+#contenedor .pagina {
   font-size: 11.5pt;
   width: 11.33in;
-  min-height: 14.67in;
+  height: 14.67in;
 
   /* Cambiamos a un modelo Flexbox para controlar el borde sin posicionamiento absoluto. */
   display: flex;
   flex-direction: column;
   /* Este padding crea el margen exterior del borde (0.81cm) y anula el de main.style.css */
   padding: 1cm;
+  background-color: rgb(242, 242, 239);
 }
 
 @media print {
-    .pagina {
+    #contenedor .pagina {
         font-size: 7.5pt !important;
-        width: 8.5in;
-        min-height: 11in;
-        padding: 0.75cm;
+        width: 8.5in !important;
+        /* height: 11in !important; */
+        min-height: fit-content !important;
+        height: fit-content !important;
+        padding: 0.75cm !important;
+        background-color: white !important;
         }
+    
 }
 
-.pagina-borde {
+#contenedor .pagina .pagina-borde {
     border-color: gray;
     border-width: 0.2em;
     border-style: inset;
@@ -33,15 +39,15 @@
     flex-direction: column;
 }
 
-#firmas {
+#contenedor .pagina #firmas {
     margin-top: auto;
 }
 
-#firma-solicitante {
+#contenedor .pagina #firma-solicitante {
     margin-top: auto;
 }
 
-.seg-titulo {
+#contenedor .pagina .seg-titulo {
     font-family: ff3;
     line-height: 1.147000;
     font-style: normal;
@@ -50,12 +56,12 @@
     font-size: 1em;
 }
 
-.seg-titulo-principal {
+#contenedor .pagina .seg-titulo-principal {
     font-size: 1.4em;
     margin: 0;
 }
 
-.seg-subtitulo {
+#contenedor .pagina .seg-subtitulo {
     font-family: ff3;
     line-height: 1.147000;
     font-style: normal;
@@ -64,7 +70,7 @@
     margin: 0;
 }
 
-.nombre-formulario {
+#contenedor .pagina .nombre-formulario {
     font-family: ff6;
     font-size: 1.3em;
     line-height: 0.938477;
@@ -74,11 +80,11 @@
     margin-right: 0.23cm;
 }
 
-.texto-derecha {
+#contenedor .pagina .texto-derecha {
     text-align: right;
 }
 
-.texto {
+#contenedor .pagina .texto {
     font-family: ff2;
     line-height: 1.359000;
     font-style: normal;
@@ -86,38 +92,38 @@
     margin: 0;
 }
 
-.lista {
+#contenedor .pagina .lista {
     /* Coloca la viñeta dentro del elemento para que el texto se alinee en un solo bloque. */
     list-style-type: none; /* Ocultamos la viñeta original para usar una personalizada. */
     padding-left: 0; /* Eliminamos el padding por defecto para un control preciso. */
     margin-top: 0;
 }
 
-.itemlista {
+#contenedor .pagina .itemlista {
     position: relative; /* Base para posicionar la viñeta de forma absoluta. */
     padding-left: 4.5em;  /* Crea la sangría para el texto. Las líneas siguientes se alinearán aquí. */
 }
 
-.itemlista::before {
+#contenedor .pagina .itemlista::before {
     /* Usamos "•" para un punto redondo y añadimos margen para separarlo del texto. */
     content: "•";
     position: absolute; /* Saca la viñeta del flujo del texto. */
     left: 2.5em;          /* La posiciona a la izquierda, creando la sangría "colgante". */
 }
 
-.seguro-linea {
+#contenedor .pagina .seguro-linea {
   display: inline-block;
   border-bottom: 0.15em solid #555;
   vertical-align: bottom;
 }
 
-.seguro-linea-top {
+#contenedor .pagina .seguro-linea-top {
   display: inline-block;
   border-top: 0.2em solid #000;
   vertical-align: bottom;
 }
 
-.seguro-checkbox {
+#contenedor .pagina .seguro-checkbox {
   display: inline-block;
   width: 1em;
   height: 1em;
@@ -130,7 +136,7 @@
   font-weight: bold;
 }
 /* Estilos para la tabla de beneficiarios */
-.seguro-tabla {
+#contenedor .pagina .seguro-tabla {
     width: 100%;
     border-collapse: collapse;
     margin-top: 0.5em;
@@ -138,25 +144,25 @@
     font-size: 0.9em; /* Ligeramente más pequeño para que quepa bien */
 }
 
-.seguro-tabla th,
-.seguro-tabla td {
-    border: 1px solid #000;
-    padding: 0.1em 0.3em;
+#contenedor .pagina .seguro-tabla th,
+#contenedor .pagina .seguro-tabla td {
+    border: 0.1em solid #000;
+    padding: 0.1em 0.3em !important;
     text-align: left;
 }
 
-.seguro-tabla th {
+#contenedor .pagina .seguro-tabla th {
     font-weight: bold;
     text-align: center;
 }
-.texto-justificado {
+
+#contenedor .pagina .texto-justificado {
     /* Justifica el texto para que el espacio entre palabras se expanda automáticamente */
     text-align: justify;
 }
 
-.padding-top-1em {
+#contenedor .pagina .padding-top-1em {
     padding-top: 1em;
-
 }
 
 /* Fuentes */
