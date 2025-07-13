@@ -7,8 +7,12 @@ Este es un proyecto base para crear documentos de múltiples páginas listos par
 - **Estructura Modular**: Separa la plantilla base, el contenido de cada página y los estilos CSS.
 - **Generación Dinámica**: El servidor Flask detecta automáticamente nuevas carpetas de documentos y las muestra en la página de inicio.
 - **CSS para Impresión**: Incluye estilos `@media print` para asegurar que los documentos se vean bien al imprimirlos.
+- **Vista Previa en Navegador**: Permite visualizar el documento final renderizado con datos y estilos, tal como se vería antes de imprimir.
+- **Simulación de ERPNext**: Incluye `frappe.style.css` para emular el entorno de los "Print Formats" de ERPNext, facilitando la creación de formatos con una apariencia familiar.
+- **CSS Auxiliar para Impresión**: El archivo `main.style.css` contiene clases y estilos de reseteo para construir documentos listos para imprimir.
 - **Datos Dinámicos por Documento**: Carga datos desde un archivo `data.json` específico para cada documento, permitiendo que el contenido sea totalmente dinámico.
 - **Vistas de Código Fuente**: Proporciona vistas del código HTML y CSS de cada documento, tanto en formato de texto plano (`raw`) como con resaltado de sintaxis para una mejor legibilidad.
+- **Incrustación Automática de Imágenes**: Las imágenes referenciadas desde la carpeta `static/` se convierten automáticamente a base64 y se incrustan en el HTML, asegurando que el documento sea autocontenido y portátil.
 - **Fácil de Extender**: Añadir un nuevo documento es tan simple como crear una nueva carpeta y sus archivos HTML de contenido.
 
 ## Estructura del Proyecto
@@ -89,3 +93,4 @@ Ambas vistas se muestran en formato Markdown para facilitar la copia y revisión
 5.  Cada uno de los archivos `pageN.html` solo debe contener el fragmento de HTML del contenido de esa página (títulos, párrafos, tablas, etc.), sin el `<html>` o `<body>`, y puede usar la sintaxis de Jinja2 para mostrar los datos del `data.json`.
 6.  (Opcional) Si necesitas estilos personalizados para el documento, agrega un archivo `style.css` en la carpeta del documento.
 7.  ¡Listo! Refresca la página de inicio en tu navegador y verás tu nuevo documento en la lista.
+   Haz clic en el nombre del documento para ver la vista previa renderizada.
