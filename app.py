@@ -237,7 +237,7 @@ def highlighted_document_html(document_name):
         base_text = f.read()
 
     base_text = re.sub(r'{[{%].*?[%}]}', '', base_text, flags=re.DOTALL)
-    base_text = re.sub(r'(<div class="pagina-container">)(.*?)(</div>)', lambda m: f'{m.group(1)}\n{pages_html}\n{m.group(3)}', base_text, flags=re.DOTALL)
+    base_text = re.sub(r'(<div id="contenedor" class="pagina-container">)(.*?)(</div>)', lambda m: f'{m.group(1)}\n{pages_html}\n{m.group(3)}', base_text, flags=re.DOTALL)
 
     title = f"Código HTML: {document_name}"
     return _render_highlighted_view(title, base_text, 'html')
