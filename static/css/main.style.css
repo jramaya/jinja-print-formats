@@ -105,6 +105,10 @@ body {
 /* Estilos para impresión */
 @media print {
 
+    #contenedor .pagina {
+        min-height: fit-content !important;
+        }
+
     .pagina-container {
         width: 100%; /* Ocupa todo el ancho de la página de impresión */
         padding: 0;
