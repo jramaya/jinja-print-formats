@@ -14,14 +14,13 @@
 
 @media print {
     #contenedor .pagina {
-        font-size: 7.5pt !important;
-        width: 8.5in !important;
-        /* height: 11in !important; */
-        min-height: fit-content !important;
-        height: fit-content !important;
-        padding: 0.75cm !important;
-        background-color: white !important;
-        }
+        width: fit-content;
+        font-size: 1.3vw;
+        min-height: fit-content;
+        height: fit-content;
+        background-color: white;
+        padding: 1vw;
+    }
     
 }
 
