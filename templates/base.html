@@ -15,7 +15,7 @@
         {% include 'document_navbar.html' %}
     {% endif %}
     <div class="print-format">
-        <div class="pagina-container">
+        <div id="contenedor" class="pagina-container">
             {% for page_html in pages %}
                 <div class="pagina">
                     {{ page_html|safe }}
