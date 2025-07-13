@@ -1,3 +1,69 @@
+/*
+  ================================================================
+  RESETEO PARA ESTILOS DE FRAPPE
+  ================================================================
+*/
+
+/* --- Reseteo del Contenedor y Layout --- */
+/*
+  Anula el padding y gap que Frappe podría imponer, y asegura
+  que el fondo sea transparente para heredar el del body.
+*/
+#contenedor {
+    padding: 0;
+    background: none;
+}
+
+/* --- Reseteo de Tipografía y Colores --- */
+/*
+  Devuelve el control del texto a los estilos de main.style.css.
+  Se usa 'inherit' para tomar los valores del elemento padre.
+*/
+#contenedor h2,
+#contenedor h4,
+#contenedor p,
+#contenedor label,
+#contenedor .value {
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    line-height: inherit;
+    margin: 0; 
+    padding: 0;
+}
+
+/* Anula el display:block forzado en las etiquetas */
+#contenedor label {
+    display: revert; /* Restaura el display por defecto (inline) */
+}
+
+/* --- Reseteo de Márgenes y Bordes de Secciones --- */
+#contenedor .print-heading,
+#contenedor .section-break {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+/* Anula el margen superior forzado en las filas */
+#contenedor .row {
+    margin-top: 0;
+}
+
+/* --- Reseteo de Tablas --- */
+/*
+  Las tablas de Frappe usan !important, por lo que necesitamos
+  anularlas con la misma técnica. 'revert' vuelve a los
+  estilos por defecto del navegador.
+*/
+#contenedor th,
+#contenedor td {
+    padding: revert;
+    vertical-align: revert;
+    border: revert;
+    color: inherit;
+    font-weight: inherit;
+}
 /* Estilos básicos para simular una página y fuentes limpias */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
@@ -10,11 +76,6 @@
   CUALQUIER regla en tu `style.css` personalizado (ej. `h1 { ... }`)
   sobrescribirá este reseteo sin necesidad de `!important`.
 */
-:where(.pagina-container *) {
-  all: revert;
-  /* display: revert; /* Restaura el 'display' por defecto del navegador (e.g., block para div, inline para span) */
-  /* box-sizing: border-box; /* Mantenemos un box-sizing consistente que es útil para el layout */
-}
 
 body {
     background-color: gray; /* Un gris claro para el fondo */
@@ -24,15 +85,15 @@ body {
     line-height: 1.5;
 }
 
-.pagina-container {
+.print-format .pagina-container {
     display: flex;
     flex-direction: column; /* Para apilar las páginas verticalmente */
     align-items: center;    /* Para centrar las páginas horizontalmente */
-    padding: 2rem 0;
+    padding: 0;
     gap: 2rem;              /* Espacio entre páginas */
 }
 
-.pagina {
+.print-format .pagina-container .pagina {
     background-color: rgb(242, 242, 239);
     width: 210mm; /* Ancho de una hoja A4 */
     min-height: 297mm; /* Alto de una hoja A4 */
@@ -43,56 +104,23 @@ body {
 
 /* Estilos para impresión */
 @media print {
-    body {
-        background-color: white; /* Fondo blanco para no gastar tinta */
-    }
 
     .pagina-container {
         width: 100%; /* Ocupa todo el ancho de la página de impresión */
         padding: 0;
-        gap: 0;
+        gap: 0 !important;
+        background-color: white !important;
     }
 
-    .pagina {
+    .pagina-container .pagina {
         width: 100%; /* Ocupa todo el ancho de la página de impresión */
-        min-height: 0;
-        margin: 0;
-        padding: 0; /* El navegador/usuario controla los márgenes de impresión */
-        box-shadow: none; /* Sin sombra */
-        page-break-after: always; /* Salto de página después de cada div.pagina */
+        /*margin: 0 !important;
+        padding: 0 !important; /* El navegador/usuario controla los márgenes de impresión */
+        box-shadow: none !important; /* Sin sombra */
+        page-break-after: always !important; /* Salto de página después de cada div.pagina */
     }
 
-    .pagina:last-child {
-        page-break-after: auto; /* Evita un salto de página extra al final */
-    }
-}
-
-/* Estilos para cuando se carga en un iframe */
-.print-format .pagina-container{
-    background-color: white;
-}
-
-.print-format.pagina-container {
-    padding: 0;
-    gap: 0;
-}
-
-.print-format .pagina {
-    width: 100%;
-    background-color: white;
-    min-height: 0;
-    margin: 0;
-    box-shadow: none;
-    page-break-after: always; /* Salto de página después de cada div.pagina */
-}
-.print-format .pagina:last-child {
-    page-break-after: auto; /* Evita un salto de página extra al final */
-}
-
-/* reset del print format */
-
-@media screen {
-	.print-format {
-        padding: 0 !important;
+    .pagina-container .pagina:last-child {
+        page-break-after: auto !important; /* Evita un salto de página extra al final */
     }
 }
