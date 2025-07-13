@@ -18,7 +18,8 @@ Este es un proyecto base para crear documentos de múltiples páginas listos par
 ├── app.py                 # Script de Python con Flask para servir la aplicación
 ├── static/
 │   └── css/
-│       └── main.style.css # Hoja de estilos global (CSS puro, no plantilla Jinja)
+│       ├── frappe.style.css # Estilos base para simular el entorno de impresión de ERPNext
+│       └── main.style.css   # Hoja de estilos global para ajustes y personalizaciones
 ├── templates/
 │   ├── base.html          # Plantilla HTML principal (esqueleto de la página)
 │   ├── index.html         # Página de inicio que lista todos los documentos
