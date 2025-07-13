@@ -104,3 +104,14 @@ li {
   max-width: 12em;
   height: auto;
 }
+
+@media print {
+    #contenedor .pagina {
+        width: fit-content;
+        font-size: 1.3vw;
+        min-height: fit-content;
+        height: fit-content;
+        background-color: white;
+    }
+    
+}
