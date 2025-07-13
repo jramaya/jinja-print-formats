@@ -1,5 +1,5 @@
-{% set lugar_fecha = document_data.lugar_fecha | default({}) %}
-{% set solicitante = document_data.solicitante | default({}) %}
+{% set lugar_fecha = doc.lugar_fecha | default({}) %}
+{% set solicitante = doc.solicitante | default({}) %}
 
 <div class="logosection">
     <img src="{{ url_for('static', filename='auth-compartir-info/logo.jpg') }}" style="width: 8em;" alt="Logo header">
