@@ -6,7 +6,6 @@
   padding-left: 2.8cm;
   padding-right: 2.8cm;
   padding-top: 1.4cm;
-  padding-bottom: 1cm;
   width: 215.9mm; /* US Letter width */
   min-height: 279.4mm; /* US Letter height */
   /* width: 45em; */
@@ -52,7 +51,7 @@ li {
 }
 .aut-linea {
   display: inline-block;
-  border-bottom: 1px solid #000;
+  border-bottom: 0.1em solid #000;
   vertical-align: bottom;
   margin: 0 0.2em;
   /* font-weight: 0.4cm;; */
@@ -89,7 +88,7 @@ li {
   line-height: 0.5em;
 }
 .saludos {
-  padding-bottom: 2em;
+  padding-bottom: 1em;
   padding-top: 2em;
 }
 .logosection {
