@@ -127,4 +127,12 @@ body {
     .pagina-container .pagina:last-child {
         page-break-after: auto !important; /* Evita un salto de página extra al final */
     }
+    /* opcional en cada archivo style.css
+    #contenedor .pagina {
+        width: fit-content;
+        font-size: 1.4vw;
+        min-height: fit-content;
+        height: fit-content;
+        background-color: white;
+    } */
 }
