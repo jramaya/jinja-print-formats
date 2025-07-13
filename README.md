@@ -94,3 +94,21 @@ Ambas vistas se muestran en formato Markdown para facilitar la copia y revisión
 6.  (Opcional) Si necesitas estilos personalizados para el documento, agrega un archivo `style.css` en la carpeta del documento.
 7.  ¡Listo! Refresca la página de inicio en tu navegador y verás tu nuevo documento en la lista.
    Haz clic en el nombre del documento para ver la vista previa renderizada.
+
+## Impresión Adaptativa
+
+Es posible configurar los estilos para que el contenido se adapte al tamaño del papel de forma automática, utilizando unidades relativas como `vw` (viewport width). Esto es útil para que el tamaño de la fuente se ajuste si se imprime en A4, A5 o Carta.
+
+Para lograrlo, puedes agregar los siguientes estilos en el `style.css` de tu documento:
+
+```css
+    #contenedor .pagina {
+        width: fit-content;
+        font-size: 1.4vw; /* tamano de fuente deseado */
+        min-height: fit-content;
+        height: fit-content;
+        background-color: white;
+    } 
+```
+
+Esto hará que el contenedor de la página se ajuste al contenido y que la fuente escale con el ancho del área de impresión.
