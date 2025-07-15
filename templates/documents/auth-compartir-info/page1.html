@@ -1,5 +1,5 @@
 {% set lugar_fecha = doc.lugar_fecha | default({}) %}
-{% set solicitante = doc.solicitante | default({}) %}
+{% set customer_doc = doc | default({}) %}
 
 <div class="logosection">
     <img src="{{ url_for('static', filename='doc_files/auth-compartir-info/logo.jpg') }}" style="width: 8em;" alt="Logo header">
@@ -22,13 +22,13 @@
 
 <p>
     Yo,
-    {% if solicitante.nombre_completo %}
-        <span class="data-fill">{{ solicitante.nombre_completo }}</span>
+    {% if customer_doc%}
+        <span class="data-fill">{{ customer_doc.first_name_custom }} {{ customer_doc.middle_name}}  {{ customer_doc.first_surname }} {{ customer_doc.second_surname }}</span>
     {% else %}
         <span style="width: 21em" class="aut-linea"></span>
     {% endif %}, mayor de edad, del domicilio de
-    {% if solicitante.domicilio %}
-        <span class="data-fill">{{ solicitante.domicilio }}</span>
+    {% if customer_doc.department %}
+        <span class="data-fill">{{ customer_doc.department }}</span>
     {% else %}
         <span style="width: 14em" class="aut-linea"></span>
     {% endif %}, por este medio autorizo al Fondo Solidario para la Familia Microempresaria (FOSOFAMILIA) a:
@@ -63,8 +63,8 @@
 
 <p>Lo anterior, en relación a las operaciones crediticias que tenga con el FOSOFAMILIA en calidad de <span
         class="input-group">
-        {% if solicitante.calidad %}
-            <span class="data-fill">{{ solicitante.calidad }}</span>
+        {% if customer_doc.calidad %}
+            <span class="data-fill">{{ customer_doc.calidad }}</span>
         {% else %}
             <span id="encalidad" style="width: 14em;" class="aut-linea"></span>
         {% endif %}
@@ -75,15 +75,15 @@
     <p style="padding-bottom: 1em;">Atentamente,</p>
     <p>F. <span style="width: 14em;" class="aut-linea"></span></p>
     <p>DUI:
-        {% if solicitante.dui %}<span class="data-fill">{{ solicitante.dui }}</span>{% else %}<span style="width: 12em;" class="aut-linea"></span>{% endif %}
+        {% if customer_doc.dui_number %}<span class="data-fill">{{ customer_doc.dui_number }}</span>{% else %}<span style="width: 12em;" class="aut-linea"></span>{% endif %}
     </p>
     <p>NIT:
-        {% if solicitante.nit %}<span class="data-fill">{{ solicitante.nit }}</span>{% else %}<span style="width: 12em;" class="aut-linea"></span>{% endif %}
+        {% if customer_doc.nit_number %}<span class="data-fill">{{ customer_doc.nit_number }}</span>{% else %}<span style="width: 12em;" class="aut-linea"></span>{% endif %}
     </p>
     <p>Teléfono:
-        {% if solicitante.telefono %}<span class="data-fill">{{ solicitante.telefono }}</span>{% else %}<span style="width: 12em;" class="aut-linea"></span>{% endif %}
+        {% if customer_doc %}<span class="data-fill">{{ customer_doc.custom_teléfono_fijo or customer_doc.mobile_phone }}</span>{% else %}<span style="width: 12em;" class="aut-linea"></span>{% endif %}
     </p>
     <p>Correo electrónico:
-        {% if solicitante.email %}<span class="data-fill">{{ solicitante.email }}</span>{% else %}<span style="width: 12em;" class="aut-linea"></span>{% endif %}
+        {% if customer_doc.email_id %}<span class="data-fill">{{ customer_doc.email_id }}</span>{% else %}<span style="width: 12em;" class="aut-linea"></span>{% endif %}
     </p>
 </div>
