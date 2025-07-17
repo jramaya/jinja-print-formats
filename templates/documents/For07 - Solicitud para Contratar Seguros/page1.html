@@ -1,0 +1,61 @@
+<div class="logosection">
+    <img src="{{ url_for('static', filename='doc_files/auth-compartir-info/logo.png') }}" style="width: 8em;" alt="Logo header">
+</div>
+<h1><span class="foso-familia">FOSOFAMILIA</span></h1>
+<h2><span class="fondo-solidario">Fondo Solidario para la Familia Microempresaria</span></h2>
+<h2 class="contratacion-de-seguros">CONTRATACIÓN DE SEGUROS</h2>
+<p>
+    <span class="linea">
+    Yo,
+    {% if customer_doc%}
+        <span class="data-fill">{{ customer_doc.first_name_custom }} {{ customer_doc.middle_name}}  {{ customer_doc.first_surname }} {{ customer_doc.second_surname }}</span>
+    {% else %}
+        <span style="width: 27em" class="aut-linea"></span>
+    {% endif %} mayor de edad, de
+    </span>
+    <br>
+    <span class="linea">
+    profesión u oficio
+        <span style="width: 9em" class="aut-linea"></span>
+    , del domicilio de
+        <span style="width: 9em" class="aut-linea"></span>
+    , con
+    </span>
+    <br>
+    <span class="linea">
+    documento único de identidad número
+        <span style="width: 14em" class="aut-linea"></span>
+    expresamente
+    </span>
+    <br>
+    <span class="linea">
+    DECLARO:
+    </span>
+</p>
+
+<div class="seccion-declaraciones">
+    <ol class="lista-declaraciones">
+        <li>
+        Que hago completo uso del derecho a mi otorgado por la Ley de Protección al Consumidor para la libre designación de la persona natural o jurídica, con la cual contrataré los seguros requeridos para mis trámites crediticios.
+        </li>
+        <li>
+        Tipo de seguro(s)
+        <br>
+        <span style="width: 7em" class="aut-linea"></span>
+        Seguro Colectivo de deuda
+        </li>
+        <li>
+        El(los) seguro(s) a contratar servirá(n) para garantizar la(s) siguiente(s) operación(es):
+        <br>
+        <span style="width: 7em" class="aut-linea"></span>
+        Créditos para la Actividad Productiva
+        <br>
+        <span style="width: 7em" class="aut-linea"></span>
+        Créditos para la Capital de Trabajo
+        <br>
+        <span style="width: 7em" class="aut-linea"></span>
+        Refinanciamiento
+        <br>
+        </li>
+    </ol>
+</div>

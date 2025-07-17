@@ -1,0 +1,98 @@
+.pagina{
+  font-family: "Times New Roman", Times, serif;
+  font-size: 9pt;
+  background-color: white;
+  color: black;
+  padding: 1.8cm 2.9cm !important;
+  width: 215.9mm; /* US Letter width */
+  min-height: 279.4mm; /* US Letter height */
+  /* width: 45em; */
+  position: relative; /* <-- Añadido para posicionamiento absoluto interno */
+}
+#contenedor h1,
+h2 {
+  text-align: center;
+  margin: 0;
+}
+#contenedor p {
+  text-align: justify;
+  line-height: 1.3;
+  margin: 0.5em 0;
+  font-size: 1.3em;
+}
+#contenedor .data-fill {
+  font-family: 'Courier New', Courier, monospace;
+  text-decoration: underline;
+  color: #444; /* Un gris oscuro, más claro que el negro puro */
+  padding: 0 0.2em; /* Espacio para que el texto no se pegue */
+  font-size: 1em;
+}
+
+#contenedor .aut-linea {
+  display: inline-block;
+  border-bottom: 0.1em solid #000;
+  vertical-align: bottom;
+  margin: 0 0.2em;
+  /* font-weight: 0.4cm;; */
+}
+
+#contenedor .foso-familia {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  font-style: italic;
+  text-align: center;
+  font-size: 1em;
+}
+
+#contenedor .fondo-solidario {
+  font-family: "Times New Roman", Times, serif;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 1.3em;
+}
+
+#contenedor .logosection {
+  position: absolute;
+  top: 4em; 
+  left: 7em;
+  margin: 0;
+  text-align: left;
+  z-index: 10;
+}
+
+#contendor .logosection img {
+  max-width: 12em;
+  height: auto;
+}
+
+#contenedor .contratacion-de-seguros {
+  font-size: 1.6em;
+  font-weight: bold;
+  padding: 1.2em;
+}
+
+#contenedor .lista-declaraciones {
+  text-align: justify;
+  line-height: 1.3;
+  font-size: 1.3em;
+  padding-left: 0; /* Resetea el padding por defecto del <ol> */
+  counter-reset: list; /* Inicia el contador de la lista */
+}
+
+#contenedor .lista-declaraciones li {
+  list-style-type: none;
+  position: relative; /* Contexto para el posicionamiento absoluto del ::before */
+  padding-left: 1.5em; /* Mueve el texto a la derecha para dar espacio al contador */
+  margin-bottom: 0.5em; /* Espacio opcional entre los elementos de la lista */
+}
+
+#contenedor .lista-declaraciones > li:before {
+    content: counter(list, lower-alpha) ") ";
+    counter-increment: list;
+    position: absolute;
+    left: 0;
+}
+
+#contenedor .seccion-declaraciones {
+  padding: 1em;
+}
