@@ -1,15 +1,23 @@
-{% set lugar_fecha = doc.lugar_fecha | default({}) %}
 {% set customer_doc = doc | default({}) %}
+{% set meses = [
+    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
+    'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+] %}
+{% set fecha = {} %}
+{% if doc.posting_date %}
+    {% set date_parts = doc.posting_date.split('-') %}
+    {% set _ = fecha.update({'anio': date_parts[0], 'mes': meses[date_parts[1] | int - 1], 'dia': date_parts[2]}) %}
+{% endif %}
 
 <div class="logosection">
     <img src="{{ url_for('static', filename='doc_files/auth-compartir-info/logo.png') }}" style="width: 8em;" alt="Logo header">
 </div>
 <div class="header-date">
     <p>
-        {% if lugar_fecha.lugar %}<span class="data-fill">{{ lugar_fecha.lugar }}</span>{% else %}<span style="width: 19em" class="aut-linea"></span>{% endif %},
-        {% if lugar_fecha.dia %}<span class="data-fill">{{ lugar_fecha.dia }}</span>{% else %}<span style="width: 4em" class="aut-linea"></span>{% endif %} de
-        {% if lugar_fecha.mes %}<span class="data-fill">{{ lugar_fecha.mes }}</span>{% else %}<span style="width: 8em;" class="aut-linea"></span>{% endif %} de
-        {% if lugar_fecha.anio %}<span class="data-fill">{{ lugar_fecha.anio }}</span>{% else %}<span style="width: 6em" class="aut-linea"></span>{% endif %}.
+        <span class="data-fill">San Salvador</span>
+        {% if fecha.dia %}<span class="data-fill">{{ fecha.dia }}</span>{% else %}<span style="width: 4em" class="aut-linea"></span>{% endif %} de
+        {% if fecha.mes %}<span class="data-fill">{{ fecha.mes }}</span>{% else %}<span style="width: 8em;" class="aut-linea"></span>{% endif %} de
+        {% if fecha.anio %}<span class="data-fill">{{ fecha.anio }}</span>{% else %}<span style="width: 6em" class="aut-linea"></span>{% endif %}.
     </p>
 </div>
 <div class="saludos">
