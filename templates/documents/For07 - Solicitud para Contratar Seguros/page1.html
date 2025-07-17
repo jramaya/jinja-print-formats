@@ -1,3 +1,5 @@
+{% set fecha = {} %}
+
 <div class="logosection">
     <img src="{{ url_for('static', filename='doc_files/auth-compartir-info/logo.png') }}" style="width: 8em;" alt="Logo header">
 </div>
@@ -57,5 +59,16 @@
         Refinanciamiento
         <br>
         </li>
+        <li>
+            Para efectos del artículo 20, literal de la Ley de Protección al Consumidor, declaro que el Fondo Solidario para la Familia Microempresaria (FOSOFAMILIA), no me ha impuesto, directa o indirectamente, ni ha influido en mi decisión para contratar el seguro con la persona natural o jurídica seleccionada y nominada en el literal “a” de esta declaración.
+        </li>
     </ol>
 </div>
+<p class="footer-date">
+    <span class="data-fill">San Salvador</span>
+    {% if fecha.dia %}<span class="data-fill">{{ fecha.dia }}</span>{% else %}<span style="width: 4em" class="aut-linea"></span>{% endif %} de
+    {% if fecha.mes %}<span class="data-fill">{{ fecha.mes }}</span>{% else %}<span style="width: 8em;" class="aut-linea"></span>{% endif %} de
+    {% if fecha.anio %}<span class="data-fill">{{ fecha.anio }}</span>{% else %}<span style="width: 6em" class="aut-linea"></span>{% endif %}.
+    <br>
+    <span style="width: 16em;padding-top: 6em;" class="aut-linea"></span>
+</p>

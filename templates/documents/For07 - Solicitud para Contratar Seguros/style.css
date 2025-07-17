@@ -1,7 +1,6 @@
-.pagina{
+#contenedor .pagina{
   font-family: "Times New Roman", Times, serif;
   font-size: 9pt;
-  background-color: white;
   color: black;
   padding: 1.8cm 2.9cm !important;
   width: 215.9mm; /* US Letter width */
@@ -83,7 +82,7 @@ h2 {
   list-style-type: none;
   position: relative; /* Contexto para el posicionamiento absoluto del ::before */
   padding-left: 1.5em; /* Mueve el texto a la derecha para dar espacio al contador */
-  margin-bottom: 0.5em; /* Espacio opcional entre los elementos de la lista */
+  margin-bottom: 2.5em; /* Espacio opcional entre los elementos de la lista */
 }
 
 #contenedor .lista-declaraciones > li:before {
@@ -95,4 +94,8 @@ h2 {
 
 #contenedor .seccion-declaraciones {
   padding: 1em;
+}
+
+#contenedor .footer-date {
+  text-align: center;
 }
