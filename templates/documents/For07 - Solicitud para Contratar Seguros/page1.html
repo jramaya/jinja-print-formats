@@ -1,4 +1,14 @@
 {% set fecha = {} %}
+{% set customer_doc = doc | default({}) %}
+{% set meses = [
+    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
+    'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+] %}
+{% set fecha = {} %}
+{% if doc.posting_date %}
+    {% set date_parts = doc.posting_date.split('-') %}
+    {% set _ = fecha.update({'anio': date_parts[0], 'mes': meses[date_parts[1] | int - 1], 'dia': date_parts[2]}) %}
+{% endif %}
 
 <div class="logosection">
     <img src="{{ url_for('static', filename='doc_files/auth-compartir-info/logo.png') }}" style="width: 8em;" alt="Logo header">
