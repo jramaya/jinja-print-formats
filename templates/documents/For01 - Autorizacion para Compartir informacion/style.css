@@ -62,6 +62,7 @@ li {
   color: #444; /* Un gris oscuro, más claro que el negro puro */
   padding: 0 0.2em; /* Espacio para que el texto no se pegue */
   font-size: 1em;
+  font-weight: bolder;
 }
 .signature-block {
   margin-top: 2em;
