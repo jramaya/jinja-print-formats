@@ -5,8 +5,19 @@
 ] %}
 {% set fecha = {} %}
 {% if doc.posting_date %}
-    {% set date_parts = doc.posting_date.split('-') %}
-    {% set _ = fecha.update({'anio': date_parts[0], 'mes': meses[date_parts[1] | int - 1], 'dia': date_parts[2]}) %}
+    {% if doc.posting_date.year is defined %}
+        {# Es un objeto de fecha (date/datetime object) #}
+        {% set anio = doc.posting_date.year %}
+        {% set mes_num = doc.posting_date.month %}
+        {% set dia = doc.posting_date.day %}
+    {% else %}
+        {# Es una cadena de texto con formato 'yyyy-mm-dd' #}
+        {% set date_parts = doc.posting_date.split('-') %}
+        {% set anio = date_parts[0] %}
+        {% set mes_num = date_parts[1] | int %}
+        {% set dia = date_parts[2] %}
+    {% endif %}
+    {% set _ = fecha.update({'anio': anio, 'mes': meses[mes_num - 1], 'dia': dia}) %}
 {% endif %}
 
 <div class="logosection">
