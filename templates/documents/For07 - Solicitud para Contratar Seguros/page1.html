@@ -30,7 +30,14 @@
     <span class="linea">
     Yo,
     {% if customer_doc %}
-        <span class="aut-linea data-fill" style="flex-grow: 1; min-width: 27em"><span style="margin-left: 1em;">{{ customer_doc.first_name_custom }} {{ customer_doc.middle_name}}  {{ customer_doc.first_surname }} {{ customer_doc.second_surname }}</span></span>
+        {#- Construir el nombre completo a partir de las partes existentes, omitiendo las vacías -#}
+        {% set name_parts = [
+            customer_doc.first_name_custom,
+            customer_doc.middle_name,
+            customer_doc.first_surname,
+            customer_doc.second_surname
+        ] %}
+        <span class="aut-linea data-fill" style="flex-grow: 1; min-width: 27em"><span style="margin-left: 1em;">{{ name_parts | select('string') | join(' ') | trim }}</span></span>
     {% else %}
         <span style="width: 27em" class="aut-linea"></span>
     {% endif %}
