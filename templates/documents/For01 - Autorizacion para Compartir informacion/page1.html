@@ -1,4 +1,10 @@
 {% set customer_doc = doc | default({}) %}
+
+{% if frappe %}
+{% set customer_name = doc.applicant %}
+{% set customer_doc = frappe.get_doc("Customer", customer_name) if customer_name else None %}
+{% endif %}
+
 {% set meses = [
     'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
     'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
