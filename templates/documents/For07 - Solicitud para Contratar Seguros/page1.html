@@ -19,27 +19,39 @@
 <p>
     <span class="linea">
     Yo,
-    {% if customer_doc%}
-        <span class="data-fill">{{ customer_doc.first_name_custom }} {{ customer_doc.middle_name}}  {{ customer_doc.first_surname }} {{ customer_doc.second_surname }}</span>
+    {% if customer_doc %}
+        <span class="aut-linea data-fill" style="flex-grow: 1; min-width: 27em"><span style="margin-left: 1em;">{{ customer_doc.first_name_custom }} {{ customer_doc.middle_name}}  {{ customer_doc.first_surname }} {{ customer_doc.second_surname }}</span></span>
     {% else %}
         <span style="width: 27em" class="aut-linea"></span>
-    {% endif %} mayor de edad, de
+    {% endif %}
+     mayor de edad, de
     </span>
-    <br>
     <span class="linea">
     profesión u oficio
+    {%if customer_doc %}
+        <span class="aut-linea data-fill" style="flex-grow: 1; min-width: 9em;">{{ customer_doc.profession_occupation }}</span>
+    {% else %}
         <span style="width: 9em" class="aut-linea"></span>
+    {% endif %}
     , del domicilio de
+    {% if customer_doc %}
+        <span style="width: 9em" class="aut-linea data-fill">{{ customer_doc.custom_departamento }}</span>
+    {% else %}
         <span style="width: 9em" class="aut-linea"></span>
+    {% endif %}
     , con
     </span>
-    <br>
     <span class="linea">
     documento único de identidad número
+    {% if customer_doc %}
+        <span class="aut-linea data-fill" style="flex-grow: 1; min-width: 14em;">
+            {{ customer_doc.dui_number}}
+        </span>
+    {% else %}
         <span style="width: 14em" class="aut-linea"></span>
+    {% endif %}
     expresamente
     </span>
-    <br>
     <span class="linea">
     DECLARO:
     </span>
@@ -75,10 +87,10 @@
     </ol>
 </div>
 <p class="footer-date">
-    <span class="data-fill">San Salvador</span>
-    {% if fecha.dia %}<span class="data-fill">{{ fecha.dia }}</span>{% else %}<span style="width: 4em" class="aut-linea"></span>{% endif %} de
-    {% if fecha.mes %}<span class="data-fill">{{ fecha.mes }}</span>{% else %}<span style="width: 8em;" class="aut-linea"></span>{% endif %} de
-    {% if fecha.anio %}<span class="data-fill">{{ fecha.anio }}</span>{% else %}<span style="width: 6em" class="aut-linea"></span>{% endif %}.
+    <span class="aut-linea data-fill">San Salvador</span>
+    {% if fecha.dia %}<span class="aut-linea data-fill">{{ fecha.dia }}</span>{% else %}<span style="width: 4em" class="aut-linea"></span>{% endif %} de
+    {% if fecha.mes %}<span class="aut-linea data-fill">{{ fecha.mes }}</span>{% else %}<span style="width: 8em;" class="aut-linea"></span>{% endif %} de
+    {% if fecha.anio %}<span class="aut-linea data-fill">{{ fecha.anio }}</span>{% else %}<span style="width: 6em" class="aut-linea"></span>{% endif %}.
     <br>
     <span style="width: 16em;padding-top: 6em;" class="aut-linea"></span>
 </p>
