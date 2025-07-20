@@ -57,7 +57,7 @@
         <span style="width: 9em" class="aut-linea"></span>
     {% endif %}
     , del domicilio de
-    {% if customer_doc %}
+    {% if customer_doc.custom_departamento %}
         <span style="width: 9em" class="aut-linea data-fill">{{ customer_doc.custom_departamento }}</span>
     {% else %}
         <span style="width: 9em" class="aut-linea"></span>
