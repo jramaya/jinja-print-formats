@@ -1,0 +1,59 @@
+/* Usamos #contenedor para aumentar la especificidad y evitar que otros estilos lo anulen */
+#contenedor .pagina {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12pt; /* Un buen tamaño base, aprox 16px */
+  padding: 1.5cm 2cm;
+  width: 215.9mm; /* US Letter width */
+  min-height: 279.4mm; /* US Letter height */
+}
+
+#contenedor .header {
+  margin-bottom: 2em;
+}
+
+#contenedor .header-center{
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1em; /* Aprox 14-16px */
+  margin: 0;
+}
+
+#contenedor h1 {
+  font-family: "Arial Black", "Impact", sans-serif;
+  font-size: 1.5em; /* Aprox 24px */
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#contenedor .pagina table {
+  width: 100%;
+  border-collapse: collapse; /* <-- LA CLAVE: Fusiona los bordes para crear la cuadrícula */
+  border: 0.15em solid #333;   /* Borde exterior grueso para la tabla */
+}
+
+#contenedor .pagina th, #contenedor .pagina td {
+  border: 0.1em solid #333;   /* Borde exterior grueso para la tabla */
+  vertical-align: top;
+}
+
+#contenedor .pagina th {
+  text-transform: uppercase;
+  border: 0.15em solid #333;   /* Borde exterior grueso para la tabla */
+  font-weight: bold;
+}
+
+/* Alineaciones específicas por columna */
+#contenedor .pagina th:nth-child(1), #contenedor .pagina td:nth-child(1) { text-align: center; } /* No. */
+#contenedor .pagina th:nth-child(2), #contenedor .pagina td:nth-child(2) { text-align: left; }   /* Articulos/Destino */
+#contenedor .pagina th:nth-child(3), #contenedor .pagina td:nth-child(3) { text-align: right; }  /* Precio Unitario */
+#contenedor .pagina th:nth-child(4), #contenedor .pagina td:nth-child(4) { text-align: right; }  /* Total */
+
+#contenedor .pagina tfoot .total-row td {
+  text-align: right;
+  font-weight: bold;
+  font-size: 1.1em;
+}

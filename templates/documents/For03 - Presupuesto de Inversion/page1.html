@@ -1,0 +1,39 @@
+<div style="position: absolute;">
+    <div class="logosection">
+        <img src="{{ url_for('static', filename='doc_files/auth-compartir-info/logo.png') }}" style="width: 8em;" alt="Logo header">
+    </div>
+</div>
+<div class="header" style="padding-top: 3em;">
+  <p class="header-center">UNIDAD DE CREDITOS Y RECUPERACIÓN</p>
+  <h1>PRESUPUESTO DE INVERSIÓN</h1>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>Articulos/Destino</th>
+      <th>Precio Unitario</th>
+      <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% set ns = namespace(grand_total=0) %}
+    {% for row in doc.custom_presupuesto_de_inversión %}
+    <tr>
+      <td>{{ row.cantidad | default("N/A") }}</td>
+      <td>{{ row.descripcion | default("N/A") }}</td>
+      <td>{{ row.precio | default("N/A") }}</td>
+      <td>{{ row.total | default("N/A") }}
+        {% set ns.grand_total = ns.grand_total + row.total %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  <tfoot>
+    <tr class="total-row">
+      <td colspan="3">TOTAL</td>
+      <td>$ {{ ns.grand_total }}</td>
+    </tr>
+  </tfoot>
+</table>
