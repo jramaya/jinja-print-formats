@@ -24,8 +24,8 @@
       <td>{{ row.cantidad | default("N/A") }}</td>
       <td>{{ row.descripcion | default("N/A") }}</td>
       <td>{{ row.precio | default("N/A") }}</td>
-      <td>{{ row.total | default("N/A") }}
-        {% set ns.grand_total = ns.grand_total + row.total %}
+      <td>{{ row.cantidad * row.precio | default("N/A") }}
+        {% set ns.grand_total = ns.grand_total + (row.cantidad*row.precio) %}
       </td>
     </tr>
     {% endfor %}

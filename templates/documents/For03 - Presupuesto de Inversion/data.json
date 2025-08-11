@@ -3,20 +3,17 @@
       {
         "cantidad": 1,
         "descripcion": "Compra de terreno para construcción",
-        "precio": 15000.00,
-        "total": 15000.00
+        "precio": 15000.00
       },
       {
         "cantidad": 2,
         "descripcion": "Vehiculo 4x4",
-        "precio": 10000.00,
-        "total": 20000.00
+        "precio": 10000.00
       },
       {
         "cantidad": 1,
         "descripcion": "Producto",
-        "precio": 1000.00,
-        "total": 1000.00
+        "precio": 1000.00
       }
     ]
 }
