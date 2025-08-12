@@ -1,17 +1,32 @@
 #contenedor .pagina {
   font-family: Arial, sans-serif;
-  font-size: 9pt;
+  font-size: 7pt;
   color: black;
-  padding: 1.8cm 2.9cm !important;
+  padding: 1.0cm 1.8cm !important;
 
   width: 297mm; /* Ancho de una hoja A4 */
   min-height: 210mm; /* Alto de una hoja A4 */
 }
 
 #contenedor .form-header {
+    justify-content: center;
+    display: flex;
+}
+
+#contenedor .header-box {
     border-style: solid;
     border-radius: 1em;
     border-width: 0.13em;
+    width: 75%;
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 2em;
+}
+
+#contenedor .header-box h6 {
+    font-weight: bold;
+    font-size: 1em;
+    margin: 0;
 }
 
 #contenedor .form-body {
@@ -26,7 +41,6 @@
 }
 
 #contenedor .lending-info th, #contenedor .lending-info td {
-    padding: 8px;
     text-align: left;
     word-wrap: break-word;
 }
@@ -41,7 +55,6 @@
 @media print {
     #contenedor .pagina {
         width: fit-content;
-        font-size: 1.3vw;
         min-height: fit-content;
         height: fit-content;
         padding: 1vw;
@@ -74,6 +87,33 @@
     display: flex;
 }
 
+.entrego-cheque-firma {
+    float: right;
+    width: 25%;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1em;
+}
+
+.caja-entrego-firma {
+    border: 0.15em solid;
+    display: flex;
+    flex-direction: column;;
+    padding: 1em;
+    text-align: center;
+}
+
+.linea-con-campo {
+    display: flex;
+    align-items: baseline;
+    text-align: left;
+}
+
+.linea-con-campo .espacio-firma {
+    flex-grow: 1;
+    margin-left: 0.5em;
+}
+
 .firma {
     text-align: center;
     margin: 1em;
@@ -83,7 +123,6 @@
 .espacio-firma {
     border-bottom: 0.15em solid black;
     display: inline-block;
-    width: 15em;
 }
 
 @page {
