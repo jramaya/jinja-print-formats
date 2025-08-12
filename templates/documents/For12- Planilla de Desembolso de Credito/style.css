@@ -1,0 +1,91 @@
+#contenedor .pagina {
+  font-family: Arial, sans-serif;
+  font-size: 9pt;
+  color: black;
+  padding: 1.8cm 2.9cm !important;
+
+  width: 297mm; /* Ancho de una hoja A4 */
+  min-height: 210mm; /* Alto de una hoja A4 */
+}
+
+#contenedor .form-header {
+    border-style: solid;
+    border-radius: 1em;
+    border-width: 0.13em;
+}
+
+#contenedor .form-body {
+    border-top: 0.13em dashed;
+    margin-top: 1em;
+}
+
+#contenedor .lending-info {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+#contenedor .lending-info th, #contenedor .lending-info td {
+    padding: 8px;
+    text-align: left;
+    word-wrap: break-word;
+}
+#contenedor .lending-info th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+#contenedor .row-span {
+    vertical-align: top;
+}
+
+@media print {
+    #contenedor .pagina {
+        width: fit-content;
+        font-size: 1.3vw;
+        min-height: fit-content;
+        height: fit-content;
+        padding: 1vw;
+        background-color: white;
+    }
+    
+}
+
+.lending-table {
+    border-collapse: collapse;
+    border: 0.16em solid black;
+}
+
+.lending-table td, .lending-table th {
+    text-align: center;
+    border: none;
+}
+
+.lending-table thead {
+    border: 0.16em solid black;
+}
+
+.lending-table thead {
+    font-weight: bold;
+}
+
+.form-signatures {
+    float: left;
+    width: 75%;
+    display: flex;
+}
+
+.firma {
+    text-align: center;
+    margin: 1em;
+    padding-top: 3em;
+}
+
+.espacio-firma {
+    border-bottom: 0.15em solid black;
+    display: inline-block;
+    width: 15em;
+}
+
+@page {
+    size: landscape;
+}
