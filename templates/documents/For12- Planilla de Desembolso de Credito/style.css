@@ -1,8 +1,8 @@
 #contenedor .pagina {
   font-family: Arial, sans-serif;
-  font-size: 7pt;
+  font-size:x-small;
   color: black;
-  padding: 1.0cm 1.8cm !important;
+  padding: 0.1cm !important;
 
   width: 297mm; /* Ancho de una hoja A4 */
   min-height: 210mm; /* Alto de una hoja A4 */
@@ -23,9 +23,9 @@
     padding-bottom: 2em;
 }
 
-#contenedor .header-box h6 {
+#contenedor .header-box h1 {
     font-weight: bold;
-    font-size: 1em;
+    font-size: small;
     margin: 0;
 }
 
@@ -85,6 +85,7 @@
     float: left;
     width: 75%;
     display: flex;
+    font-size: small;
 }
 
 .entrego-cheque-firma {
@@ -97,10 +98,21 @@
 
 .caja-entrego-firma {
     border: 0.15em solid;
+    width: 100%;
+    font-size: small;
+    line-height: 3;
     display: flex;
     flex-direction: column;;
     padding: 1em;
     text-align: center;
+}
+
+#contenedor .caja-entrego-firma h2 {
+    padding: 0;
+    margin: 0;
+    font-size: inherit;
+    line-height: 1.9;
+    font-weight: 400;
 }
 
 .linea-con-campo {
