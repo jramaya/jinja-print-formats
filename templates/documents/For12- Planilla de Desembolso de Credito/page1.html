@@ -1,3 +1,4 @@
+{% set data = doc | default({}) %}
 <div class="form-header">
     <div class="header-box">
         <h1>FONDO SOLIDARIO PARA LA FAMILIA MICROEMPRESARIA</h1>
@@ -10,63 +11,63 @@
 <table class="lending-info">
         <tr>
             <th>N° PRESTAMO:</th>
-            <td>00700611000004477</td>
+            <td>{{ data.numero_prestamo | default('No disponible') }}</td>
             <th>CRÉDITOS:</th>
-            <td>FOFAMILIA</td>
+            <td>{{ data.creditos | default('No disponible') }}</td>
             <th>N° VOUCHER:</th>
-            <td>05007194 0500715</td>
+            <td>{{ data.numero_voucher | default('No disponible') }}</td>
         </tr>
         <tr>
             <th>COD. CLIENTE:</th>
-            <td>00891000736</td>
+            <td>{{ data.codigo_cliente | default('No disponible') }}</td>
             <th>FONDOS:</th>
-            <td>1.00</td>
+            <td>{{ data.fondos | default('No disponible') }}</td>
             <th>N° CHEQUE:</th>
-            <td>1921-18922-18</td>
+            <td>{{ data.numero_cheque | default('No disponible') }}</td>
         </tr>
         <tr>
             <th>NOMBRE DEL PREST.:</th>
-            <td>Mercedes Elisabeth Orellana Vida. DE-</td>
+            <td>{{ data.nombre_prestamista | default('Nombre no disponible') }}</td>
             <th>HOMBRES:</th>
-            <td>0.00</td>
+            <td>{{ data.hombres | default('N/A') }}</td>
             <th>PLAZO:</th>
-            <td>923 0 MESES</td>
+            <td>{{ data.plazo | default('No disponible') }}</td>
         </tr>
         <tr>
             <th>DEPARTAMENTO:</th>
-            <td>San Salvador</td>
+            <td>{{ data.departamento | default('No disponible') }}</td>
             <th>MUJERES:</th>
-            <td>1.00</td>
+            <td>{{ data.mujeres | default('N/A') }}</td>
             <th>INTERES:</th>
-            <td>2.00 MENSAUL</td>
+            <td>{{ data.interes | default('No disponible') }}</td>
         </tr>
         <tr class="row-span">
             <th>LUGAR:</th>
-            <td>POLIG. H.PJE. 15 PONIENTE No. 257, RESIDENCIAL LINCOLN, MEJICANOS</td>
+            <td>{{ data.lugar | default('No disponible') }}</td>
             <th>MONTO INDIV.:</th>
-            <td>$12,000.00</td>
+            <td>{{ data.monto_individual_info | default('No disponible') }}</td>
             <th>FECHA DE OTORGAMIENTO:</th>
-            <td>27/05/2025</td>
+            <td>{{ data.fecha_otorgamiento | default('Fecha no disponible') }}</td>
         </tr>
         <tr>
             <th>CANTON:</th>
-            <td>MEJICANOS</td>
+            <td>{{ data.canton | default('No disponible') }}</td>
             <th>BANCO COMERCIAL:</th>
-            <td>BCO Agricola Com. [REC]</td>
+            <td>{{ data.banco_comercial | default('No disponible') }}</td>
             <th>FECHA DE VENCIMIENTO:</th>
-            <td>27/05/2030</td>
+            <td>{{ data.fecha_vencimiento | default('Fecha no disponible') }}</td>
         </tr>
         <tr>
             <th>CUENTA CORRIENTE:</th>
-            <td>50612364-7</td>
+            <td>{{ data.cuenta_corriente | default('No disponible') }}</td>
             <th></th>
             <td></td>
             <th>LINEA DE CRÉDITO:</th>
-            <td>LINEA DE CREDITO MICROTOP PRENDARIA LP. 2/4/5EGPREN</td>
+            <td>{{ data.linea_credito | default('No disponible') }}</td>
         </tr>
         <tr>
             <th>ASESOR DE CRÉDITOS:</th>
-            <td>Walter Boris Figueroa</td>
+            <td>{{ data.asesor_creditos | default('Asesor no disponible') }}</td>
             <th></th>
             <td></td>
             <th></th>
@@ -91,20 +92,26 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>MERCEDES ELISABETH ORELLANA VDA. DE QUINTANILLA</td>
-                <td>01522292-6</td>
-                <td>xxxxxxxx-xxxx-cred</td>
-                <td>12,000.00</td>
-                <td>0.00</td>
-                <td>452.11</td>
-                <td>0.00</td>
-                <td>16.95</td>
-                <td>$4,333.00</td>
-                <td>$8,123.22</td>
-                <td></td>
-                <td></td>
+            {% if data.desembolsos %}
+                {% for desembolso in data.desembolsos %}
+                <tr>
+                    <td>{{ desembolso.nombre_cliente | default('Nombre no disponible') }}</td>
+                    <td>{{ desembolso.dui | default('No disponible') }}</td>
+                    <td>{{ desembolso.cheque_voucher | default('No disponible') }}</td>
+                    <td>{{ desembolso.monto_individual | default('0.00') }}</td>
+                    <td>{{ desembolso.seguro | default('0.00') }}</td>
+                    <td>{{ desembolso.descuentos_promocion | default('0.00') }}</td>
+                    <td>{{ desembolso.otros_aditivos | default('0.00') }}</td>
+                    <td>{{ desembolso.papeleria_gastos_admin | default('0.00') }}</td>
+                    <td>{{ desembolso.credito_anterior | default('0.00') }}</td>
+                    <td>{{ desembolso.valor_cheque | default('0.00') }}</td>
+                    <td></td>
+                    <td></td>
                 </tr>
+                {% endfor %}
+            {% else %}
+                <tr><td colspan="12" style="text-align: center;">No hay desembolsos para mostrar.</td></tr>
+            {% endif %}
         </tbody>
     </table>
 </div>
@@ -135,5 +142,8 @@
 </div>
 
 <div class="lista-chqeues">
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem non nam voluptas minus quidem atque, commodi veniam omnis tenetur labore totam repudiandae vitae sunt? Nihil quam alias iusto! Ipsam, nulla.</p>
+    <p>NOTA: EN CASO QUE EL SOCIO NO PUEDA FIRMAR DE RECIBO, ESTAMPAR LA HUELLA DIGITAL DEL PULGAR</p>
+    {% if data.lista_cheques_texto %}
+    <pre class="lista-cheques" style="padding-top: 2em;">{{ data.lista_cheques_texto | default('')}}</pre>
+    {% endif %}
 </div>

@@ -1,0 +1,38 @@
+{
+    "numero_prestamo": "00700611000004477",
+    "creditos": "FOFAMILIA",
+    "numero_voucher": "05007194 0500715",
+    "codigo_cliente": "00891000736",
+    "fondos": "1.00",
+    "numero_cheque": "1921-18922-18",
+    "nombre_prestamista": "Mercedes Elisabeth Orellana Vida. DE-",
+    "hombres": "0.00",
+    "plazo": "923 0 MESES",
+    "departamento": "San Salvador",
+    "mujeres": "1.00",
+    "interes": "2.00 MENSAUL",
+    "lugar": "POLIG. H.PJE. 15 PONIENTE No. 257, RESIDENCIAL LINCOLN, MEJICANOS",
+    "monto_individual_info": "$12,000.00",
+    "fecha_otorgamiento": "27/05/2025",
+    "canton": "MEJICANOS",
+    "banco_comercial": "BCO Agricola Com. [REC]",
+    "fecha_vencimiento": "27/05/2030",
+    "cuenta_corriente": "50612364-7",
+    "linea_credito": "LINEA DE CREDITO MICROTOP PRENDARIA LP. 2/4/5EGPREN",
+    "asesor_creditos": "Walter Boris Figueroa",
+    "desembolsos": [
+        {
+            "nombre_cliente": "MERCEDES ELISABETH ORELLANA VDA. DE QUINTANILLA",
+            "dui": "01522292-6",
+            "cheque_voucher": "xxxxxxxx-xxxx-cred",
+            "monto_individual": "12,000.00",
+            "seguro": "0.00",
+            "descuentos_promocion": "452.11",
+            "otros_aditivos": "0.00",
+            "papeleria_gastos_admin": "16.95",
+            "credito_anterior": "$4,333.00",
+            "valor_cheque": "$8,123.22"
+        }
+    ],
+    "lista_cheques_texto": "SE EMITEN TRES CHEQUES:\n    1)CHQ#18921 A/N ...\n    2)CHQ#18922 A/N ...\n    3)CHQ#18923 A/N ..."
+}
