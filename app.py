@@ -1,6 +1,7 @@
 import os
 import json
 import re
+from datetime import datetime
 from flask import Flask, render_template, render_template_string, abort, make_response, url_for
 
 # Nuevas importaciones para el resaltado de sintaxis
@@ -17,6 +18,95 @@ app = Flask(__name__)
 
 REPORTS_PATH = os.path.join('templates', 'documents')
 TEMPLATES_PATH = 'templates'
+MOCK_DATA_PATH = 'mock_data'
+
+# --- FRAPPE MOCK UTILITIES ---
+class FrappeUtilsMock:
+    def today(self):
+        """Retorna la fecha de hoy en formato YYYY-MM-DD."""
+        return datetime.now().strftime('%Y-%m-%d')
+
+    def formatdate(self, value, format_string="dd/MM/yyyy"):
+        """Formatea una fecha. Acepta objetos de fecha o strings 'YYYY-MM-DD'."""
+        if not value:
+            return ""
+        if isinstance(value, str):
+            try:
+                value = datetime.strptime(value, '%Y-%m-%d')
+            except ValueError:
+                return value # Devuelve el string original si no se puede parsear
+        
+        # Convierte el formato de Python a uno más simple para el usuario si es necesario
+        format_string = format_string.replace('dd', '%d').replace('MM', '%m').replace('yyyy', '%Y')
+        return value.strftime(format_string)
+
+class FrappeDict(dict):
+    """Clase que simula el acceso a un diccionario como si fuera un objeto."""
+    def __getattr__(self, key):
+        try:
+            return self[key]
+        except KeyError:
+            # Retorna None si la clave no existe, como hace Frappe
+            return None
+    
+    def get(self, key, default=None):
+        return super().get(key, default)
+
+class FrappeMock:
+    utils = FrappeUtilsMock()
+    _data_cache = {}
+
+    def _load_doctype_data(self, doctype):
+        """Carga y cachea los datos de un doctype desde un archivo JSON."""
+        if doctype not in self._data_cache:
+            filepath = os.path.join(MOCK_DATA_PATH, f"{doctype}.json")
+            if os.path.exists(filepath):
+                with open(filepath, 'r', encoding='utf-8') as f:
+                    self._data_cache[doctype] = json.load(f)
+            else:
+                self._data_cache[doctype] = [] # Si no hay archivo, el doctype está vacío
+        return self._data_cache[doctype]
+
+    def get_doc(self, doctype, name):
+        """Simula frappe.get_doc. Busca un documento por su 'name'."""
+        all_docs = self._load_doctype_data(doctype)
+        for doc in all_docs:
+            if doc.get("name") == name:
+                return FrappeDict(doc)
+        return None # Retorna None si no se encuentra
+
+    def get_all(self, doctype, filters={}, fields=["name"], limit=0):
+        """Simula frappe.get_all. Filtra documentos."""
+        all_docs = self._load_doctype_data(doctype)
+        results = []
+        for doc in all_docs:
+            match = True
+            for key, value in filters.items():
+                if doc.get(key) != value:
+                    match = False
+                    break
+            if match:
+                # Si fields es ["*"], devuelve el documento completo
+                if fields == ["*"]:
+                    results.append(FrappeDict(doc))
+                else: # Sino, solo los campos solicitados
+                    filtered_doc = {field: doc.get(field) for field in fields}
+                    results.append(FrappeDict(filtered_doc))
+        
+        if limit > 0:
+            return results[:limit]
+        return results
+
+    def format(self, value, specifier_dict):
+        """Simulación básica de frappe.format para moneda y porcentaje."""
+        if not value:
+            return ""
+        fieldtype = specifier_dict.get("fieldtype")
+        if fieldtype == "Currency":
+            return f"$ {float(value):,.2f}"
+        if fieldtype == "Percent":
+            return f"{float(value):.2f} %"
+        return str(value)
 
 # --- MISTUNE & PYGMENTS SETUP ---
 # Crea un renderizador personalizado que usa Pygments para los bloques de código.
@@ -67,6 +157,14 @@ def _embed_images_as_base64(html_content):
             return full_src_attribute
 
     return pattern.sub(replacer, html_content)
+
+@app.context_processor
+def inject_frappe():
+    """
+    Inyecta un objeto 'frappe' simulado en el contexto de todas las plantillas.
+    Esto permite usar {{ frappe.utils.today() }}, etc.
+    """
+    return dict(frappe=FrappeMock())
 
 @app.route('/')
 def index():

@@ -5,13 +5,15 @@ Este es un proyecto base para crear documentos de múltiples páginas listos par
 ## Características
 
 - **Estructura Modular**: Separa la plantilla base, el contenido de cada página y los estilos CSS.
-- **Generación Dinámica**: El servidor Flask detecta automáticamente nuevas carpetas de documentos y las muestra en la página de inicio.
+- **Generación Dinámica**: El servidor Flask detecta automáticamente nuevos documentos y los lista en la página de inicio.
 - **CSS para Impresión**: Incluye estilos `@media print` para asegurar que los documentos se vean bien al imprimirlos.
 - **Vista Previa en Navegador**: Permite visualizar el documento final renderizado con datos y estilos, tal como se vería antes de imprimir.
-- **Simulación de ERPNext**: Incluye `frappe.style.css` para emular el entorno de los "Print Formats" de ERPNext, facilitando la creación de formatos con una apariencia familiar.
+- **Entorno de Simulación Avanzado para ERPNext**:
+  - Simula el objeto global `frappe` de ERPNext, permitiendo que las plantillas Jinja2 sean compatibles entre el entorno local y un sistema ERPNext real.
+  - Incluye implementaciones locales de `frappe.get_doc`, `frappe.get_all`, `frappe.utils.formatdate`, `frappe.utils.today` y `frappe.format`.
+  - Carga datos para `frappe.get_doc` y `frappe.get_all` desde archivos JSON locales (ej. `Customer.json`), permitiendo un desarrollo de formatos de impresión fiel al entorno de producción.
 - **CSS Auxiliar para Impresión**: El archivo `main.style.css` contiene clases y estilos de reseteo para construir documentos listos para imprimir.
-- **Datos Dinámicos por Documento**: Carga datos desde un archivo `data.json` específico para cada documento, permitiendo que el contenido sea totalmente dinámico.
-- **Vistas de Código Fuente**: Proporciona vistas del código HTML y CSS de cada documento, tanto en formato de texto plano (`raw`) como con resaltado de sintaxis para una mejor legibilidad.
+- **Vistas de Código Fuente Mejoradas**: Proporciona vistas del código HTML y CSS de cada documento, tanto en formato de texto plano (`raw`) como en una vista web con resaltado de sintaxis para una mejor legibilidad.
 - **Incrustación Automática de Imágenes**: Las imágenes referenciadas desde la carpeta `static/` se convierten automáticamente a base64 y se incrustan en el HTML, asegurando que el documento sea autocontenido y portátil.
 - **Fácil de Extender**: Añadir un nuevo documento es tan simple como crear una nueva carpeta y sus archivos HTML de contenido.
 
@@ -28,10 +30,10 @@ Este es un proyecto base para crear documentos de múltiples páginas listos par
 │   ├── base.html          # Plantilla HTML principal (esqueleto de la página)
 │   ├── index.html         # Página de inicio que lista todos los documentos
 │   └── documents/
-│       └── Lorem-Ipsum-document/  # Carpeta para un documento específico
-│           ├── data.json      # Datos en formato JSON para el documento
-│           ├── page1.html     # Contenido de la primera página (con tags Jinja)
-│           ├── page2.html     # Contenido de la segunda página (con tags Jinja)
+│       └── Lorem-Ipsum-document/  # Carpeta para un documento de ejemplo
+│           ├── Customer.json  # (Opcional) Datos para simular `frappe.get_doc("Customer", ...)`
+│           ├── data.json      # (Opcional) Datos principales, disponibles en la variable `doc`
+│           ├── page1.html     # Contenido de la primera página
 │           └── style.css      # (Opcional) Estilos CSS específicos para este documento
 └── README.md              # Este archivo
 ```
