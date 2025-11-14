@@ -1,0 +1,85 @@
+
+#contenedor .pagina {
+    background-color: white;
+    padding-top: 22em;
+    background-image: url('/static/img/melody.jpg');
+    background-repeat: no-repeat;
+    background-position: center; 
+    background-size: 41em;
+}
+        /* body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        } */
+
+.shape-container {
+    width: 600px;
+    height: 500px;
+    position: relative;
+    clip-path: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500"><clipPath id="shape"><path d="M30 0 H570 C590 75 590 137.5 570 200 Q510 250 450 287.5 L300 500 L150 287.5 Q90 250 30 200 C10 137.5 10 75 30 0 Z" /></clipPath></svg>#shape');
+    overflow: hidden;
+}
+.left-shape {
+    float: left;
+    width: 50%;
+    height: 100%;
+    shape-outside: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 500"><path d="M30 0 C10 75 10 137.5 30 200 Q90 250 150 287.5 L300 500 L0 500 L0 0 Z" fill="black"/></svg>');
+}
+.right-shape {
+    float: right;
+    width: 50%;
+    height: 100%;
+    shape-outside: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 500"><path d="M270 0 C290 75 290 137.5 270 200 Q210 250 150 287.5 L0 500 L300 500 L300 0 Z" fill="black"/></svg>');
+}
+.shape-text {
+    font-family: Arial, sans-serif;
+    font-size: 1em;
+    line-height: 1.5;
+    color: white;
+    text-align: justify;
+
+    font-weight: bold;
+    /* Agrega un contorno blanco al texto para mejorar la legibilidad sobre la imagen de fondo */
+    text-shadow:
+        -1px -1px 0 black,  
+         1px -1px 0 black,
+        -1px  1px 0 black,
+         1px  1px 0 black;
+}
+
+.shape-text dl {
+    margin: 0;
+}
+
+.shape-text dt {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 1em;
+    text-transform: uppercase;
+}
+
+.shape-text dd {
+    margin-left: 0;
+    margin-bottom: 0.5em;
+}
+
+.shape-text .examples {
+    font-style: italic;
+}
+
+@media print {
+
+    #contenedor .pagina {
+        padding-top: 11em;
+        background-image: url('/static/img/melody.jpg');
+        background-repeat: no-repeat;
+        background-position: center; 
+        background-size: 41em;
+        -webkit-print-color-adjust: exact; /* Asegura que los fondos se impriman */
+    }
+}
